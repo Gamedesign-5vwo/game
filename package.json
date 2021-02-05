@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "browser": "^0.2.6",
+    "core-js": "^3.8.3",
     "gulp-sass": "^4.1.0"
   },
   "devDependencies": {

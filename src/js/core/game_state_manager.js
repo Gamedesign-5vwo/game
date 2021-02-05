@@ -15,7 +15,7 @@ export class GameStateManager {
 
     /**
      * Registers a new state
-     * @param {GameState} gameStateClass
+     * @param {Object} gameStateClass
      */
     registerGameState(gameStateClass) {
         const instance = new gameStateClass();
@@ -41,7 +41,7 @@ export class GameStateManager {
     moveToState(id, payload = {}) {
         if (this.currentState) {
             //Already active state
-            if (key === this.currentState.getId()) {
+            if (id === this.currentState.getId()) {
                 console.error(`State '${id}' is already active`);
                 return false;
             }
@@ -65,9 +65,12 @@ export class GameStateManager {
         removeAllChildren(document.body);
 
         //Set body
-        document.body.id = `gameState_${key}`;
+        document.body.id = `gameState_${id}`;
         document.body.className = `gameState`;
         document.body.innerHTML = this.currentState.getHtml();
+
+        //Enter state
+        this.currentState.onEnter(payload);
 
         //Update history
         window.history.pushState({

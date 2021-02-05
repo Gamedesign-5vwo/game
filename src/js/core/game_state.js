@@ -1,5 +1,3 @@
-import { GameStateManager } from "./game_state_manager";
-
 /**
  * Basic state
  */
@@ -12,7 +10,7 @@ export class GameState {
         this.id = id;
 
         /**
-         * @type {GameStateManager}
+         * @type {import("./game_state_manager").GameStateManager}
          */
         this.gameStateManager = null;
     }
@@ -30,7 +28,7 @@ export class GameState {
      * @returns {HTMLElement}
      */
     getElement() {
-        return document.getElementById("state_" + this.key);
+        return document.getElementById("state_" + this.id);
     }
 
     /**
@@ -54,7 +52,7 @@ export class GameState {
     /*** Events ***/
     /**
      * Callback when game state is set active
-     * @param {StateManager} stateManager
+     * @param {import("./game_state_manager").GameStateManager} gameStateManager
      */
     onInit(gameStateManager) {
         this.gameStateManager = gameStateManager;
