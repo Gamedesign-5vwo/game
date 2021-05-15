@@ -1,4 +1,4 @@
-import { Entity } from "./entity.js";
+import { Entity } from "../entity.js";
 /**************************************************
  * Klasse: Background
  * x, y (positie van de linkerbovenhoek)

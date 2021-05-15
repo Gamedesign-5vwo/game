@@ -1,6 +1,7 @@
 import { Entity } from "../entity.js";
-import { EntityManager } from "../entity_manager.js";
-import { InputManager } from "../input_manager.js";
+import { EntityManager } from "../managers/entity_manager.js";
+import { InputManager } from "../managers/input_manager.js";
+import { StateManager } from "../managers/state_manager.js";
 import { Item } from "./item.js";
 
 export const STOP_PLAYER_ITEM = "stop_player_item";
@@ -9,30 +10,27 @@ export const STOP_PLAYER_ITEM = "stop_player_item";
  * Klasse: Player
  * x, y (positie van de linkerbovenhoek)
  * color (de kleur van de speler)
- * inputManager (de regelaar van inputs)
- * entityManager (Entity Manager)
+ * stateManager (de state manager)
  **************************************************/
 export class Player extends Entity {
     /**
      * @param {number} x
      * @param {number} y
      * @param {string} color
-     * @param {InputManager} inputManager
-     * @param {EntityManager} entityManager
+     * @param {StateManager} stateManager
      */
-    constructor(x, y, color, inputManager, entityManager) {
+    constructor(x, y, color, stateManager) {
         super(x, y, 25, 25 * 2);
 
         this.color = color;
-        this.inputManager = inputManager;
-        this.entityManager = entityManager;
+        this.stateManager = stateManager;
 
         this.listeners = { pre_item_check: [], post_item_check: [] };
         this.listenerId = 0;
 
         this.inhand = null;
         // Als E wordt losgelaten verwissel item
-        this.inputManager.addListener(69, () => {
+        this.stateManager.inputManager.addListener(69, () => {
             for (let i = 0; i < this.listeners.pre_item_check.length; i++) {
                 if (
                     this.listeners.pre_item_check[i].listener() ===
@@ -44,9 +42,10 @@ export class Player extends Entity {
 
             if (this.inhand) this.inhand = null;
             else {
-                const entities = this.entityManager.entities.filter(
-                    (entity) => entity instanceof Item
-                );
+                const entities =
+                    this.stateManager.entityManager.entities.filter(
+                        (entity) => entity instanceof Item
+                    );
                 for (let i = 0; i < entities.length; i++) {
                     const entity = entities[i];
                     if (this.collides(entity)) {
@@ -112,13 +111,13 @@ export class Player extends Entity {
         super.update();
         // Input check
         if (
-            this.inputManager.isKeydown(87) &&
-            !this.inputManager.isKeydown(83)
+            this.stateManager.inputManager.isKeydown(87) &&
+            !this.stateManager.inputManager.isKeydown(83)
         ) {
             this.dy = -this.speed;
         } else if (
-            this.inputManager.isKeydown(83) &&
-            !this.inputManager.isKeydown(87)
+            this.stateManager.inputManager.isKeydown(83) &&
+            !this.stateManager.inputManager.isKeydown(87)
         ) {
             this.dy = this.speed;
         } else {
@@ -126,13 +125,13 @@ export class Player extends Entity {
         }
 
         if (
-            this.inputManager.isKeydown(68) &&
-            !this.inputManager.isKeydown(65)
+            this.stateManager.inputManager.isKeydown(68) &&
+            !this.stateManager.inputManager.isKeydown(65)
         ) {
             this.dx = this.speed;
         } else if (
-            this.inputManager.isKeydown(65) &&
-            !this.inputManager.isKeydown(68)
+            this.stateManager.inputManager.isKeydown(65) &&
+            !this.stateManager.inputManager.isKeydown(68)
         ) {
             this.dx = -this.speed;
         } else {
@@ -140,7 +139,7 @@ export class Player extends Entity {
         }
 
         // Collision check
-        const entities = this.entityManager.entities.filter(
+        const entities = this.stateManager.entityManager.entities.filter(
             (entity) => entity.canCollide && entity !== this
         );
         for (let i = 0; i < entities.length; i++) {

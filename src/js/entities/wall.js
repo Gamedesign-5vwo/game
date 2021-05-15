@@ -4,7 +4,7 @@ import { Entity } from "../entity.js";
  * Klasse: Wall
  * x, y (positie van de linkerbovenhoek)
  * width, height (de grootte van de muur per tile (25))
- * color (de kleur van de speler)
+ * color (de kleur van de muur)
  **************************************************/
 export class Wall extends Entity {
     /**

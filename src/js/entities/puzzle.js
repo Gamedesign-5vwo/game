@@ -1,5 +1,5 @@
 import { Entity } from "../entity.js";
-import { EntityManager } from "../entity_manager.js";
+import { EntityManager } from "../managers/entity_manager.js";
 import { Item } from "./item.js";
 import { PuzzlePart } from "./items/puzzle_part.js";
 import { Player, STOP_PLAYER_ITEM } from "./player.js";

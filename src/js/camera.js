@@ -1,4 +1,4 @@
-import { Entity } from "./entity.js";
+import { StateManager } from "./managers/state_manager.js";
 
 function clamp(value, min, max) {
     if (value < min) return min;
@@ -8,34 +8,52 @@ function clamp(value, min, max) {
 
 /**************************************************
  * Klasse: Camera
- * entity (entity die gevolgd wordt)
+ * stateManager (statemanager)
  **************************************************/
 export class Camera {
     /**
-     * @param {Entity} entity
+     * @param {StateManager} stateManager
      */
-    constructor(entity) {
-        this.entity = entity;
+    constructor(stateManager) {
+        this.stateManager = stateManager;
 
-        this.minX = 0;
-        this.minY = 0;
-        this.maxX = 10000;
-        this.maxY = 10000;
+        /**
+         * @type {{
+         *  [state: number]: {
+         *      minX: number,
+         *      minY: number,
+         *      maxX: number,
+         *      maxY: number
+         *  }
+         * }}
+         */
+        this.sizes = {
+            0: {
+                minX: 0,
+                minY: 0,
+                maxX: 1025,
+                maxY: 725,
+            },
+        };
     }
+
+    //TODO: interpolate
+    update() {}
 
     /**
      * @param {CanvasRenderingContext2D} ctx
      */
     render(ctx) {
         let camX = clamp(
-            this.entity.x - 1025 / 2,
-            this.minX,
-            this.maxX - 1025 / 2
+            this.stateManager.player.x - 1025 / 2,
+            this.sizes[this.stateManager.currentState.getId()].minX,
+            this.sizes[this.stateManager.currentState.getId()].maxX - 1025
         );
+
         let camY = clamp(
-            this.entity.y - 725 / 2,
-            this.minY,
-            this.maxY - 725 / 2
+            this.stateManager.player.y - 725 / 2,
+            this.sizes[this.stateManager.currentState.getId()].minY,
+            this.sizes[this.stateManager.currentState.getId()].maxY - 725
         );
 
         ctx.translate(-camX, -camY);
