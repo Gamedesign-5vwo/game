@@ -9,6 +9,10 @@ export class Background extends Entity {
         super(x, y, width, height);
         this.color = color;
     }
+
+    /**
+     * @param {CanvasRenderingContext2D} ctx
+     */
     render(ctx) {
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height);

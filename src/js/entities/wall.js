@@ -13,6 +13,9 @@ export class Wall extends Entity {
         this.color = color;
     }
 
+    /**
+     * @param {CanvasRenderingContext2D} ctx
+     */
     render(ctx) {
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height);

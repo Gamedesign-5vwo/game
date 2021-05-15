@@ -18,6 +18,9 @@ export class Camera {
         this.maxY = 10000;
     }
 
+    /**
+     * @param {CanvasRenderingContext2D} ctx
+     */
     render(ctx) {
         let camX = clamp(
             this.entity.x - 1025 / 2,

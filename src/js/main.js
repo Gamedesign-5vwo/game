@@ -37,12 +37,16 @@ import { InputManager } from "./input_manager.js";
 import { Camera } from "./camera.js";
 import { Wall } from "./entities/wall.js";
 import { PuzzlePart } from "./entities/items/puzzle_part.js";
+import { Puzzle } from "./entities/puzzle.js";
+import { Key } from "./entities/items/key.js";
 
 /**************************************************
  * Game loop
  **************************************************/
-// Update alle objecten, maak het spelbord schoon,
-// teken de elementen opnieuw en herhaal de game loop.
+/**
+ * Update alle objecten, maak het spelbord schoon,
+ * teken de elementen opnieuw en herhaal de game loop.
+ */
 function gameloop() {
     update();
     clearSpelbord();
@@ -50,7 +54,9 @@ function gameloop() {
     requestAnimationFrame(gameloop);
 }
 
-// Ververst de (waarden van de) objecten.
+/**
+ * Ververst de (waarden van de) objecten.
+ */
 function update() {
     for (let i = 0; i < entities.length; i++) {
         entities[i].update();
@@ -63,8 +69,10 @@ function clearSpelbord() {
     ctx.clearRect(0, 0, spelbord.width, spelbord.height);
 }
 
-// De render functie tekent het canvas opnieuw
-// met daarin de objecten
+/**
+ * De render functie tekent het canvas opnieuw met daarin de objecten
+ * @param {CanvasRenderingContext2D} ctx
+ */
 function render(ctx) {
     // camera.render(ctx);
     achtergrond.render(ctx);
@@ -92,8 +100,25 @@ window.onload = function () {
 
     //Add enities
     let player = new Player(50, 50, "red", inputManager, entities);
+
+    entities.push(
+        new Puzzle(
+            25 * 3,
+            25 * 3,
+            player,
+            new Key(25 * 3, 25 * 3, "level_1"),
+            entities,
+            [5, 6]
+        )
+    );
     entities.push(player);
-    entities.push(new PuzzlePart(150, 150, 1));
+    entities.push(new PuzzlePart(25 * 6, 25 * 6, 0));
+    entities.push(new PuzzlePart(25 * 8, 25 * 6, 1));
+    entities.push(new PuzzlePart(25 * 9, 25 * 7, 2));
+    entities.push(new PuzzlePart(25 * 10, 25 * 5, 3));
+    entities.push(new PuzzlePart(25 * 12, 25 * 7, 4));
+    entities.push(new PuzzlePart(25 * 14, 25 * 9, 7));
+    entities.push(new PuzzlePart(25 * 7, 25 * 2, 8));
 
     //Walls
     //boven

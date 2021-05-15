@@ -1,6 +1,8 @@
 import { Entity } from "../entity.js";
 import { Item } from "./item.js";
 
+export const STOP_PLAYER_ITEM = "stop_player_item";
+
 /**************************************************
  * Klasse: Player
  * x, y (positie van de linkerbovenhoek)
@@ -16,9 +18,21 @@ export class Player extends Entity {
         this.inputManager = inputManager;
         this.entities = entities;
 
+        this.listeners = { pre_item_check: [], post_item_check: [] };
+        this.listenerId = 0;
+
         this.inhand = null;
-        // Als E wordt ingedrukt verwissel item
+        // Als E wordt losgelaten verwissel item
         this.inputManager.addListener(69, () => {
+            for (let i = 0; i < this.listeners.pre_item_check.length; i++) {
+                if (
+                    this.listeners.pre_item_check[i].listener() ===
+                    STOP_PLAYER_ITEM
+                ) {
+                    return;
+                }
+            }
+
             if (this.inhand) this.inhand = null;
             else {
                 const entities = this.entities.filter(
@@ -32,9 +46,45 @@ export class Player extends Entity {
                     }
                 }
             }
+
+            for (let i = 0; i < this.listeners.post_item_check.length; i++) {
+                this.listeners.post_item_check[i].listener();
+            }
         });
 
         this.speed = 2;
+    }
+
+    // Voer functie uit voordat item wordt verwisseld
+    addPreItemCheck(listener) {
+        const id = this.listenerId++;
+        this.listeners.pre_item_check.push({
+            id: id,
+            listener: listener,
+        });
+        return id;
+    }
+
+    // Voer functie uit na item verwisseld is
+    addPostItemCheck() {
+        const id = this.listenerId++;
+        this.listeners.post_item_check.push({
+            id: id,
+            listener: listener,
+        });
+        return id;
+    }
+
+    // Verwijder listener
+    removeListener(id) {
+        for (const key in this.listeners) {
+            const index = this.listeners[key].findIndex((x) => x.id === id);
+            if (index > -1) {
+                this.listeners[key].splice(index, 1);
+                return true;
+            }
+        }
+        return false;
     }
 
     update() {
@@ -86,6 +136,9 @@ export class Player extends Entity {
         }
     }
 
+    /**
+     * @param {CanvasRenderingContext2D} ctx
+     */
     render(ctx) {
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
