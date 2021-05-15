@@ -7,6 +7,13 @@ import { Entity } from "../entity.js";
  * color (de kleur van de speler)
  **************************************************/
 export class Wall extends Entity {
+    /**
+     * @param {number} x
+     * @param {number} y
+     * @param {number} width
+     * @param {number} height
+     * @param {string} color
+     */
     constructor(x, y, width, height, color) {
         super(x, y, 25 * width, 25 * height);
 

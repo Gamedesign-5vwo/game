@@ -1,3 +1,5 @@
+import { Entity } from "./entity.js";
+
 function clamp(value, min, max) {
     if (value < min) return min;
     else if (value > max) return max;
@@ -9,6 +11,9 @@ function clamp(value, min, max) {
  * entity (entity die gevolgd wordt)
  **************************************************/
 export class Camera {
+    /**
+     * @param {Entity} entity
+     */
     constructor(entity) {
         this.entity = entity;
 

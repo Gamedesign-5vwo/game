@@ -7,6 +7,11 @@ import { PUZZLE_SIZE, renderPuzzlePart } from "../puzzle.js";
  * type (welke puzzle stuk)
  **************************************************/
 export class PuzzlePart extends Item {
+    /**
+     * @param {number} x
+     * @param {number} y
+     * @param {number} type
+     */
     constructor(x, y, type) {
         super(x, y, PUZZLE_SIZE.width, PUZZLE_SIZE.height);
         this.type = type;

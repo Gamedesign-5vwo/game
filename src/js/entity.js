@@ -5,6 +5,13 @@
  * canCollide (heeft de entity collision default naar true)
  **************************************************/
 export class Entity {
+    /**
+     * @param {number} x
+     * @param {number} y
+     * @param {number} width
+     * @param {number} height
+     * @param {boolean} canCollide
+     */
     constructor(x, y, width, height, canCollide = true) {
         this.x = x;
         this.y = y;
@@ -35,7 +42,11 @@ export class Entity {
         return this.y;
     }
 
-    // Check of de entity collides met een andere
+    /**
+     * Check of de entity collides met een andere
+     * @param {Entity} entity
+     * @returns {boolean}
+     */
     collides(entity) {
         if (
             this.top > entity.bottom ||
@@ -49,7 +60,10 @@ export class Entity {
         return true;
     }
 
-    // Reactie op collision
+    /**
+     * Reactie op collision
+     * @param {Entity} entity
+     */
     collide(entity) {
         // afstand tussen twee middens + correctie voor groote
         let vector_x =
@@ -85,6 +99,9 @@ export class Entity {
         this.y += this.dy;
     }
 
-    //Is hier zodat alle entities een render functie hebben
-    render() {}
+    /**
+     * Is hier zodat alle entities een render functie hebben
+     * @param {CanvasRenderingContext2D} ctx
+     */
+    render(ctx) {}
 }

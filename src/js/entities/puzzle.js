@@ -1,4 +1,5 @@
 import { Entity } from "../entity.js";
+import { EntityManager } from "../entity_manager.js";
 import { Item } from "./item.js";
 import { PuzzlePart } from "./items/puzzle_part.js";
 import { Player, STOP_PLAYER_ITEM } from "./player.js";
@@ -22,7 +23,7 @@ export const PUZZLE_SIZE = {
 
 /**
  * @param {CanvasRenderingContext2D} ctx
- * @param {number} part
+ * @param {PuzzlePart} part
  */
 export function renderPuzzlePart(ctx, part) {
     const position = PUZZLE_POSITION[part.type];
@@ -46,7 +47,7 @@ export function renderPuzzlePart(ctx, part) {
  * Klasse: Puzzle
  * x, y (positie van de linkerbovenhoek)
  * player (de speler)
- * entities (Lijst van entities)
+ * entityManager (entity manager)
  * parts (Lijst van puzzle parts)
  **************************************************/
 export class Puzzle extends Entity {
@@ -55,10 +56,10 @@ export class Puzzle extends Entity {
      * @param {number} y
      * @param {Player} player
      * @param {Item} reward
-     * @param {Array<Entity>} entities
+     * @param {EntityManager} entityManager
      * @param {Array<number>} parts
      */
-    constructor(x, y, player, reward, entities, parts = []) {
+    constructor(x, y, player, reward, entityManager, parts = []) {
         super(x, y, 20 * 3 + 40, 20 * 3 + 40, false);
         this.player = player;
         this.reward = reward;
@@ -68,14 +69,14 @@ export class Puzzle extends Entity {
             return new PuzzlePart(position.x, position.y, type);
         });
 
-        this.entities = entities;
+        this.entityManager = entityManager;
 
         // Als item wordt losgelaten kijk of het puzzle stuk is
         this.preItemCheckId = this.player.addPreItemCheck(() => {
             if (
                 !this.collides(this.player) ||
                 (this.player.inhand &&
-                    !this.player.inhand instanceof PuzzlePart)
+                    !(this.player.inhand instanceof PuzzlePart))
             ) {
                 return;
             }
@@ -83,7 +84,7 @@ export class Puzzle extends Entity {
             let rows = [];
             let columns = [];
             for (const type in PUZZLE_POSITION) {
-                const position = this.typeToPosition(type);
+                const position = this.typeToPosition(parseInt(type));
                 rows.push(position.y + PUZZLE_SIZE.height / 2);
                 columns.push(position.x + PUZZLE_SIZE.width / 2);
             }
@@ -116,7 +117,7 @@ export class Puzzle extends Entity {
             if (hasPartAtPosition) {
                 // Verwissel de twee stukken
                 this.player.inhand = hasPartAtPosition;
-                this.entities.push(hasPartAtPosition);
+                this.entityManager.add(hasPartAtPosition);
                 this.parts.splice(this.parts.indexOf(hasPartAtPosition), 1);
             } else {
                 if (!puzzlePart) return;
@@ -126,8 +127,8 @@ export class Puzzle extends Entity {
             }
 
             if (puzzlePart) {
-                // Verwijder van entities lijst
-                this.entities.splice(this.entities.indexOf(puzzlePart), 1);
+                // Verwijder van entityManager lijst
+                this.entityManager.remove(puzzlePart);
 
                 // Zet positie
                 puzzlePart.x = closestColumn;
@@ -142,6 +143,10 @@ export class Puzzle extends Entity {
         });
     }
 
+    /**
+     * @param {number} type
+     * @returns {{x: number, y: number}}
+     */
     typeToPosition(type) {
         return {
             x: PUZZLE_POSITION[type].x * PUZZLE_SIZE.width + this.x + 20,
@@ -172,8 +177,8 @@ export class Puzzle extends Entity {
         if (!this.isCompleted()) return;
 
         this.player.removeListener(this.preItemCheckId);
-        this.entities.splice(this.entities.indexOf(this), 1);
-        this.entities.push(this.reward);
+        this.entityManager.remove(this);
+        this.entityManager.add(this.reward);
     }
 
     /**

@@ -1,4 +1,6 @@
 import { Entity } from "../entity.js";
+import { EntityManager } from "../entity_manager.js";
+import { InputManager } from "../input_manager.js";
 import { Item } from "./item.js";
 
 export const STOP_PLAYER_ITEM = "stop_player_item";
@@ -8,15 +10,22 @@ export const STOP_PLAYER_ITEM = "stop_player_item";
  * x, y (positie van de linkerbovenhoek)
  * color (de kleur van de speler)
  * inputManager (de regelaar van inputs)
- * entities (Lijst van entities)
+ * entityManager (Entity Manager)
  **************************************************/
 export class Player extends Entity {
-    constructor(x, y, color, inputManager, entities) {
+    /**
+     * @param {number} x
+     * @param {number} y
+     * @param {string} color
+     * @param {InputManager} inputManager
+     * @param {EntityManager} entityManager
+     */
+    constructor(x, y, color, inputManager, entityManager) {
         super(x, y, 25, 25 * 2);
 
         this.color = color;
         this.inputManager = inputManager;
-        this.entities = entities;
+        this.entityManager = entityManager;
 
         this.listeners = { pre_item_check: [], post_item_check: [] };
         this.listenerId = 0;
@@ -35,7 +44,7 @@ export class Player extends Entity {
 
             if (this.inhand) this.inhand = null;
             else {
-                const entities = this.entities.filter(
+                const entities = this.entityManager.entities.filter(
                     (entity) => entity instanceof Item
                 );
                 for (let i = 0; i < entities.length; i++) {
@@ -55,7 +64,11 @@ export class Player extends Entity {
         this.speed = 2;
     }
 
-    // Voer functie uit voordat item wordt verwisseld
+    /**
+     * Voer functie uit voordat item wordt verwisseld
+     * @param {Function} listener
+     * @returns {number}
+     */
     addPreItemCheck(listener) {
         const id = this.listenerId++;
         this.listeners.pre_item_check.push({
@@ -65,8 +78,12 @@ export class Player extends Entity {
         return id;
     }
 
-    // Voer functie uit na item verwisseld is
-    addPostItemCheck() {
+    /**
+     * Voer functie uit na item verwisseld is
+     * @param {Function} listener
+     * @returns {number}
+     */
+    addPostItemCheck(listener) {
         const id = this.listenerId++;
         this.listeners.post_item_check.push({
             id: id,
@@ -75,7 +92,11 @@ export class Player extends Entity {
         return id;
     }
 
-    // Verwijder listener
+    /**
+     * Verwijder listener
+     * @param {number} id
+     * @returns {boolean}
+     */
     removeListener(id) {
         for (const key in this.listeners) {
             const index = this.listeners[key].findIndex((x) => x.id === id);
@@ -119,7 +140,7 @@ export class Player extends Entity {
         }
 
         // Collision check
-        const entities = this.entities.filter(
+        const entities = this.entityManager.entities.filter(
             (entity) => entity.canCollide && entity !== this
         );
         for (let i = 0; i < entities.length; i++) {
