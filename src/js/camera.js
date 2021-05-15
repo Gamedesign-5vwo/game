@@ -6,6 +6,11 @@ function clamp(value, min, max) {
     return value;
 }
 
+// https://www.febucci.com/2018/08/easing-functions/
+function lerp(start, end, time) {
+    return start + (end - start) * time;
+}
+
 /**************************************************
  * Klasse: Camera
  * stateManager (statemanager)
@@ -16,6 +21,8 @@ export class Camera {
      */
     constructor(stateManager) {
         this.stateManager = stateManager;
+        this.x = 0;
+        this.y = 0;
 
         /**
          * @type {{
@@ -34,16 +41,16 @@ export class Camera {
                 maxX: 1025,
                 maxY: 725,
             },
+            1: {
+                minX: 0,
+                minY: 0,
+                maxX: 2025,
+                maxY: 725,
+            },
         };
     }
 
-    //TODO: interpolate
-    update() {}
-
-    /**
-     * @param {CanvasRenderingContext2D} ctx
-     */
-    render(ctx) {
+    update() {
         let camX = clamp(
             this.stateManager.player.x - 1025 / 2,
             this.sizes[this.stateManager.currentState.getId()].minX,
@@ -56,6 +63,14 @@ export class Camera {
             this.sizes[this.stateManager.currentState.getId()].maxY - 725
         );
 
-        ctx.translate(-camX, -camY);
+        this.x = lerp(this.x, camX, 0.03);
+        this.y = lerp(this.y, camY, 0.03);
+    }
+
+    /**
+     * @param {CanvasRenderingContext2D} ctx
+     */
+    render(ctx) {
+        ctx.translate(-this.x, -this.y);
     }
 }

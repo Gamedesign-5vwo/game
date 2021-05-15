@@ -20,13 +20,15 @@ export class Door extends Entity {
      * @param {number} height
      * @param {string} color
      * @param {string} id
+     * @param {Function} onOpened
      * @param {StateManager} stateManager
      */
-    constructor(x, y, width, height, color, id, stateManager) {
+    constructor(x, y, width, height, color, id, onOpened, stateManager) {
         super(x, y, 25 * width, 25 * height);
 
         this.color = color;
         this.id = id;
+        this.onOpened = onOpened;
         this.stateManager = stateManager;
 
         // Als item wordt losgelaten kijk of het de juist sleutel is
@@ -46,6 +48,9 @@ export class Door extends Entity {
             );
             this.stateManager.entityManager.remove(this);
             this.stateManager.player.inhand = null;
+
+            //Voer onopend uit
+            this.onOpened();
 
             return STOP_PLAYER_ITEM;
         });

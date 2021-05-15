@@ -7,6 +7,7 @@ import { Player } from "../entities/player.js";
 import { Puzzle } from "../entities/puzzle.js";
 import { Wall } from "../entities/wall.js";
 import { State } from "../state.js";
+import { StateTwo } from "./state_two.js";
 
 /**************************************************
  * Klasse: StateOne
@@ -28,7 +29,8 @@ export class StateOne extends State {
                 this.stateManager.player,
                 new Key(25 * 3, 25 * 3, "level_1"),
                 this.stateManager.entityManager,
-                [5, 6]
+                // [5, 6]
+                [0, 1, 2, 3, 4, 5, 6, 7, 8]
             )
         );
         this.stateManager.entityManager.add(new PuzzlePart(25 * 6, 25 * 6, 0));
@@ -62,6 +64,9 @@ export class StateOne extends State {
                 3,
                 "brown",
                 "level_1",
+                () => {
+                    this.stateManager.setState(StateTwo);
+                },
                 this.stateManager
             )
         );
