@@ -1,4 +1,4 @@
-import { StateManager } from "./managers/state_manager.js";
+import { GameManager } from "./managers/game_manager.js";
 
 function clamp(value, min, max) {
     if (value < min) return min;
@@ -13,14 +13,14 @@ function lerp(start, end, time) {
 
 /**************************************************
  * Klasse: Camera
- * stateManager (statemanager)
+ * gameManager (statemanager)
  **************************************************/
 export class Camera {
     /**
-     * @param {StateManager} stateManager
+     * @param {GameManager} gameManager
      */
-    constructor(stateManager) {
-        this.stateManager = stateManager;
+    constructor(gameManager) {
+        this.gameManager = gameManager;
         this.x = 0;
         this.y = 0;
 
@@ -52,15 +52,15 @@ export class Camera {
 
     update() {
         let camX = clamp(
-            this.stateManager.player.x - 1025 / 2,
-            this.sizes[this.stateManager.currentState.getId()].minX,
-            this.sizes[this.stateManager.currentState.getId()].maxX - 1025
+            this.gameManager.player.x - 1025 / 2,
+            this.sizes[this.gameManager.currentState].minX,
+            this.sizes[this.gameManager.currentState].maxX - 1025
         );
 
         let camY = clamp(
-            this.stateManager.player.y - 725 / 2,
-            this.sizes[this.stateManager.currentState.getId()].minY,
-            this.sizes[this.stateManager.currentState.getId()].maxY - 725
+            this.gameManager.player.y - 725 / 2,
+            this.sizes[this.gameManager.currentState].minY,
+            this.sizes[this.gameManager.currentState].maxY - 725
         );
 
         this.x = lerp(this.x, camX, 0.03);

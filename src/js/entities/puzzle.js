@@ -29,7 +29,7 @@ export function renderPuzzlePart(ctx, part) {
     const position = PUZZLE_POSITION[part.type];
 
     const puzzleImg = new Image();
-    puzzleImg.src = "./images/meloen.png";
+    puzzleImg.src = part.puzzleImg;
     ctx.drawImage(
         puzzleImg,
         PUZZLE_SIZE.width * position.x,
@@ -59,17 +59,17 @@ export class Puzzle extends Entity {
      * @param {EntityManager} entityManager
      * @param {Array<number>} parts
      */
-    constructor(x, y, player, reward, entityManager, parts = []) {
+    constructor(x, y, player, reward, entityManager, puzzleImg, parts = []) {
         super(x, y, 20 * 3 + 40, 20 * 3 + 40, false);
         this.player = player;
         this.reward = reward;
+        this.puzzleImg = puzzleImg;
+        this.entityManager = entityManager;
 
         this.parts = parts.map((type) => {
             const position = this.typeToPosition(type);
-            return new PuzzlePart(position.x, position.y, type);
+            return new PuzzlePart(position.x, position.y, type, this.puzzleImg);
         });
-
-        this.entityManager = entityManager;
 
         // Als item wordt losgelaten kijk of het puzzle stuk is
         this.preItemCheckId = this.player.addPreItemCheck(() => {
@@ -167,6 +167,9 @@ export class Puzzle extends Entity {
             // Kijk of het op de juise positie is
             const position = this.typeToPosition(type);
             if (part.x !== position.x || part.y !== position.y) return false;
+
+            // Kijk of het onderdeel is van de juiste puzzle
+            if (part.puzzleImg !== this.puzzleImg) return false;
         }
         // Anders true
         return true;

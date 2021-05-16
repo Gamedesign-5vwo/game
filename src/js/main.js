@@ -21,9 +21,9 @@ var spelbord;
 var ctx;
 
 /**
- * @type {StateManager}
+ * @type {GameManager}
  */
-var stateManager;
+var gameManager;
 
 /**************************************************
  * Event listeners
@@ -40,7 +40,7 @@ var stateManager;
  * autootjes en wat je maar wilt.
  * Hieronder een klasse om de achtergrond te tekenen.
  **************************************************/
-import { StateManager } from "./managers/state_manager.js";
+import { GameManager } from "./managers/game_manager.js";
 
 /**************************************************
  * Game loop
@@ -60,7 +60,7 @@ function gameloop() {
  * Ververst de (waarden van de) objecten.
  */
 function update() {
-    stateManager.update();
+    gameManager.update();
 }
 
 // canvas schoonmaken
@@ -74,7 +74,7 @@ function clearSpelbord() {
  * @param {CanvasRenderingContext2D} ctx
  */
 function render(ctx) {
-    stateManager.render(ctx);
+    gameManager.render(ctx);
 }
 
 /**************************************************
@@ -92,7 +92,7 @@ window.onload = function () {
     // De context van het spelbord opvragen
     ctx = spelbord.getContext("2d");
 
-    stateManager = new StateManager();
+    gameManager = new GameManager();
 
     // start de game loop
     gameloop();

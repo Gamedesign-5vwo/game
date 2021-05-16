@@ -1,15 +1,16 @@
 import { Camera } from "../camera.js";
 import { Background } from "../entities/background.js";
 import { Player } from "../entities/player.js";
-import { State } from "../state.js";
-import { StateOne } from "../states/state_one.js";
+import { Room } from "../room.js";
+import { RoomOne } from "../rooms/room_one.js";
+import { RoomTwo } from "../rooms/room_two.js";
 import { EntityManager } from "./entity_manager.js";
 import { InputManager } from "./input_manager.js";
 
-export class StateManager {
+export class GameManager {
     constructor() {
         /**
-         * @type {State}
+         * @type {number}
          */
         this.currentState;
 
@@ -38,23 +39,27 @@ export class StateManager {
          */
         this.inputManager = new InputManager();
 
-        this.setState(StateOne);
+        /**
+         * @type {Array<typeof Room>}
+         */
+        this.rooms = [RoomOne, RoomTwo];
+
+        for (let i = 0; i < this.rooms.length; i++) {
+            const room = new this.rooms[i](this);
+            room.init();
+        }
+
+        this.setState(0);
     }
 
     /**
-     * @param {typeof State} state
+     * @param {number} state
      */
     setState(state) {
-        this.currentState = new state(this);
-        this.currentState.init();
-    }
-
-    init() {
-        this.currentState.init();
+        this.currentState = state;
     }
 
     update() {
-        this.currentState.update();
         this.camera.update();
         this.entityManager.update();
     }
@@ -66,6 +71,5 @@ export class StateManager {
         this.camera.render(ctx);
         this.background.render(ctx);
         this.entityManager.render(ctx);
-        this.currentState.render(ctx);
     }
 }

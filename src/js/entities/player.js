@@ -1,7 +1,7 @@
 import { Entity } from "../entity.js";
 import { EntityManager } from "../managers/entity_manager.js";
 import { InputManager } from "../managers/input_manager.js";
-import { StateManager } from "../managers/state_manager.js";
+import { GameManager } from "../managers/game_manager.js";
 import { Item } from "./item.js";
 
 export const STOP_PLAYER_ITEM = "stop_player_item";
@@ -10,27 +10,27 @@ export const STOP_PLAYER_ITEM = "stop_player_item";
  * Klasse: Player
  * x, y (positie van de linkerbovenhoek)
  * color (de kleur van de speler)
- * stateManager (de state manager)
+ * gameManager (de state manager)
  **************************************************/
 export class Player extends Entity {
     /**
      * @param {number} x
      * @param {number} y
      * @param {string} color
-     * @param {StateManager} stateManager
+     * @param {GameManager} gameManager
      */
-    constructor(x, y, color, stateManager) {
+    constructor(x, y, color, gameManager) {
         super(x, y, 25, 25 * 2);
 
         this.color = color;
-        this.stateManager = stateManager;
+        this.gameManager = gameManager;
 
         this.listeners = { pre_item_check: [], post_item_check: [] };
         this.listenerId = 0;
 
         this.inhand = null;
         // Als E wordt losgelaten verwissel item
-        this.stateManager.inputManager.addListener(69, () => {
+        this.gameManager.inputManager.addListener(69, () => {
             for (let i = 0; i < this.listeners.pre_item_check.length; i++) {
                 if (
                     this.listeners.pre_item_check[i].listener() ===
@@ -40,19 +40,31 @@ export class Player extends Entity {
                 }
             }
 
-            if (this.inhand) this.inhand = null;
-            else {
-                const entities =
-                    this.stateManager.entityManager.entities.filter(
-                        (entity) => entity instanceof Item
-                    );
-                for (let i = 0; i < entities.length; i++) {
-                    const entity = entities[i];
-                    if (this.collides(entity)) {
-                        this.inhand = entity;
-                        break;
-                    }
+            const entities = this.gameManager.entityManager.entities.filter(
+                (entity) => entity instanceof Item
+            );
+
+            let collidingEntity;
+            for (let i = 0; i < entities.length; i++) {
+                const entity = entities[i];
+                if (entity === this.inhand) continue;
+                if (!this.collides(entity)) continue;
+
+                collidingEntity = entity;
+                break;
+            }
+
+            if (this.inhand) {
+                if (collidingEntity) {
+                    // Verwissel
+                    this.inhand = collidingEntity;
+                } else {
+                    // Leg neer
+                    this.inhand = null;
                 }
+            } else {
+                // Pak op
+                this.inhand = collidingEntity;
             }
 
             for (let i = 0; i < this.listeners.post_item_check.length; i++) {
@@ -111,13 +123,13 @@ export class Player extends Entity {
         super.update();
         // Input check
         if (
-            this.stateManager.inputManager.isKeydown(87) &&
-            !this.stateManager.inputManager.isKeydown(83)
+            this.gameManager.inputManager.isKeydown(87) &&
+            !this.gameManager.inputManager.isKeydown(83)
         ) {
             this.dy = -this.speed;
         } else if (
-            this.stateManager.inputManager.isKeydown(83) &&
-            !this.stateManager.inputManager.isKeydown(87)
+            this.gameManager.inputManager.isKeydown(83) &&
+            !this.gameManager.inputManager.isKeydown(87)
         ) {
             this.dy = this.speed;
         } else {
@@ -125,13 +137,13 @@ export class Player extends Entity {
         }
 
         if (
-            this.stateManager.inputManager.isKeydown(68) &&
-            !this.stateManager.inputManager.isKeydown(65)
+            this.gameManager.inputManager.isKeydown(68) &&
+            !this.gameManager.inputManager.isKeydown(65)
         ) {
             this.dx = this.speed;
         } else if (
-            this.stateManager.inputManager.isKeydown(65) &&
-            !this.stateManager.inputManager.isKeydown(68)
+            this.gameManager.inputManager.isKeydown(65) &&
+            !this.gameManager.inputManager.isKeydown(68)
         ) {
             this.dx = -this.speed;
         } else {
@@ -139,7 +151,7 @@ export class Player extends Entity {
         }
 
         // Collision check
-        const entities = this.stateManager.entityManager.entities.filter(
+        const entities = this.gameManager.entityManager.entities.filter(
             (entity) => entity.canCollide && entity !== this
         );
         for (let i = 0; i < entities.length; i++) {
