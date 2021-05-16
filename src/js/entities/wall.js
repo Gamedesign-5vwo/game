@@ -1,4 +1,5 @@
 import { Entity } from "../entity.js";
+import { RENDER_LAYERS } from "../managers/entity_manager.js";
 
 /**************************************************
  * Klasse: Wall
@@ -15,7 +16,7 @@ export class Wall extends Entity {
      * @param {string} color
      */
     constructor(x, y, width, height, color) {
-        super(x, y, 25 * width, 25 * height);
+        super(x, y, 25 * width, 25 * height, RENDER_LAYERS.wall);
 
         this.color = color;
     }

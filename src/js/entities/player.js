@@ -1,5 +1,5 @@
 import { Entity } from "../entity.js";
-import { EntityManager } from "../managers/entity_manager.js";
+import { EntityManager, RENDER_LAYERS } from "../managers/entity_manager.js";
 import { InputManager } from "../managers/input_manager.js";
 import { GameManager } from "../managers/game_manager.js";
 import { Item } from "./item.js";
@@ -20,7 +20,7 @@ export class Player extends Entity {
      * @param {GameManager} gameManager
      */
     constructor(x, y, color, gameManager) {
-        super(x, y, 25, 25 * 2);
+        super(x, y, 25, 25 * 2, RENDER_LAYERS.player);
 
         this.color = color;
         this.gameManager = gameManager;
@@ -47,24 +47,22 @@ export class Player extends Entity {
             let collidingEntity;
             for (let i = 0; i < entities.length; i++) {
                 const entity = entities[i];
-                if (entity === this.inhand) continue;
+                if (this.inhand && entity === this.inhand.entity) continue;
                 if (!this.collides(entity)) continue;
 
                 collidingEntity = entity;
                 break;
             }
 
-            if (this.inhand) {
-                if (collidingEntity) {
-                    // Verwissel
-                    this.inhand = collidingEntity;
-                } else {
-                    // Leg neer
-                    this.inhand = null;
-                }
+            if (this.inhand) this.inhand.entity.layer = this.inhand.layer;
+            if (collidingEntity) {
+                const layer = collidingEntity.layer;
+                collidingEntity.layer = RENDER_LAYERS.inhand;
+                // Verwissel/Pak op
+                this.inhand = { entity: collidingEntity, layer: layer };
             } else {
-                // Pak op
-                this.inhand = collidingEntity;
+                // Leg neer
+                this.inhand = null;
             }
 
             for (let i = 0; i < this.listeners.post_item_check.length; i++) {
@@ -163,8 +161,8 @@ export class Player extends Entity {
 
         // Zet item naar speler locatie
         if (this.inhand) {
-            this.inhand.x = this.x;
-            this.inhand.y = this.y;
+            this.inhand.entity.x = this.x;
+            this.inhand.entity.y = this.y;
         }
     }
 

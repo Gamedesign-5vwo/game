@@ -1,5 +1,5 @@
 import { Entity } from "../entity.js";
-import { EntityManager } from "../managers/entity_manager.js";
+import { EntityManager, RENDER_LAYERS } from "../managers/entity_manager.js";
 import { Item } from "./item.js";
 import { PuzzlePart } from "./items/puzzle_part.js";
 import { Player, STOP_PLAYER_ITEM } from "./player.js";
@@ -60,7 +60,14 @@ export class Puzzle extends Entity {
      * @param {Array<number>} parts
      */
     constructor(x, y, player, reward, entityManager, puzzleImg, parts = []) {
-        super(x, y, 20 * 3 + 40, 20 * 3 + 40, false);
+        super(
+            x,
+            y,
+            20 * 3 + 40,
+            20 * 3 + 40,
+            RENDER_LAYERS.floor_decoration,
+            false
+        );
         this.player = player;
         this.reward = reward;
         this.puzzleImg = puzzleImg;
@@ -76,7 +83,7 @@ export class Puzzle extends Entity {
             if (
                 !this.collides(this.player) ||
                 (this.player.inhand &&
-                    !(this.player.inhand instanceof PuzzlePart))
+                    !(this.player.inhand.entity instanceof PuzzlePart))
             ) {
                 return;
             }
@@ -113,10 +120,17 @@ export class Puzzle extends Entity {
                 (part) => part.x === closestColumn && part.y === closestRow
             );
 
-            const puzzlePart = this.player.inhand;
+            const puzzlePart = this.player.inhand
+                ? this.player.inhand.entity
+                : null;
             if (hasPartAtPosition) {
                 // Verwissel de twee stukken
-                this.player.inhand = hasPartAtPosition;
+                const layer = hasPartAtPosition.layer;
+                hasPartAtPosition.layer = RENDER_LAYERS.inhand;
+                this.player.inhand = {
+                    entity: hasPartAtPosition,
+                    layer: layer,
+                };
                 this.entityManager.add(hasPartAtPosition);
                 this.parts.splice(this.parts.indexOf(hasPartAtPosition), 1);
             } else {

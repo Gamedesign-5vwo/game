@@ -1,4 +1,5 @@
 import { Entity } from "../entity.js";
+import { RENDER_LAYERS } from "../managers/entity_manager.js";
 /**************************************************
  * Klasse: Background
  * x, y (positie van de linkerbovenhoek)
@@ -13,7 +14,7 @@ export class Background extends Entity {
      * @param {string} color
      */
     constructor(x, y, width, height, color) {
-        super(x, y, width, height);
+        super(x, y, width, height, RENDER_LAYERS.background);
         this.color = color;
     }
 

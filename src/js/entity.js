@@ -1,3 +1,5 @@
+import { RENDER_LAYERS } from "./managers/entity_manager.js";
+
 /**************************************************
  * Klasse: Entity
  * x, y (positie van de linkerbovenhoek)
@@ -10,16 +12,25 @@ export class Entity {
      * @param {number} y
      * @param {number} width
      * @param {number} height
+     * @param {number} layer
      * @param {boolean} canCollide
      */
-    constructor(x, y, width, height, canCollide = true) {
+    constructor(
+        x,
+        y,
+        width,
+        height,
+        layer = RENDER_LAYERS.floor_decoration,
+        canCollide = true
+    ) {
         this.x = x;
         this.y = y;
         this.dx = 0;
         this.dy = 0;
-        this.canCollide = canCollide;
         this.width = width;
         this.height = height;
+        this.layer = layer;
+        this.canCollide = canCollide;
     }
 
     // Getters voor collision (https://github.com/pothonprogramming/pothonprogramming.github.io/blob/master/content/square-collision-response/response.js)

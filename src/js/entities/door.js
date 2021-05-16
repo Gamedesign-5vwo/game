@@ -1,8 +1,8 @@
 import { Entity } from "../entity.js";
-import { EntityManager } from "../managers/entity_manager.js";
+import { RENDER_LAYERS } from "../managers/entity_manager.js";
 import { GameManager } from "../managers/game_manager.js";
 import { Key } from "./items/key.js";
-import { Player, STOP_PLAYER_ITEM } from "./player.js";
+import { STOP_PLAYER_ITEM } from "./player.js";
 
 /**************************************************
  * Klasse: Door
@@ -24,7 +24,7 @@ export class Door extends Entity {
      * @param {GameManager} gameManager
      */
     constructor(x, y, width, height, color, id, onOpened, gameManager) {
-        super(x, y, 25 * width, 25 * height);
+        super(x, y, 25 * width, 25 * height, RENDER_LAYERS.wall);
 
         this.color = color;
         this.id = id;
@@ -36,15 +36,15 @@ export class Door extends Entity {
             if (
                 !this.collides(this.gameManager.player) ||
                 !this.gameManager.player.inhand ||
-                !(this.gameManager.player.inhand instanceof Key) ||
-                this.gameManager.player.inhand.id !== this.id
+                !(this.gameManager.player.inhand.entity instanceof Key) ||
+                this.gameManager.player.inhand.entity.id !== this.id
             ) {
                 return;
             }
 
             // Verwijder deur en sleutel
             this.gameManager.entityManager.remove(
-                this.gameManager.player.inhand
+                this.gameManager.player.inhand.entity
             );
             this.gameManager.entityManager.remove(this);
             this.gameManager.player.inhand = null;
