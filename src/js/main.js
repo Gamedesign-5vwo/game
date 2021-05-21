@@ -65,7 +65,7 @@ function update() {
 
 // canvas schoonmaken
 function clearSpelbord() {
-    ctx.setTransform(1, 0, 0, 1, 0, 0); //reset the transform matrix as it is cumulative
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, spelbord.width, spelbord.height);
 }
 
