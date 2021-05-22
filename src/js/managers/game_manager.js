@@ -1,5 +1,4 @@
 import { Camera } from "../camera.js";
-import { Background } from "../entities/background.js";
 import { Player } from "../entities/player.js";
 import { Room } from "../room.js";
 import { RoomOne } from "../rooms/room_one.js";
@@ -15,21 +14,6 @@ export class GameManager {
         this.currentState;
 
         /**
-         * @type {Player}
-         */
-        this.player;
-
-        /**
-         * @type {Background}
-         */
-        this.background;
-
-        /**
-         * @type {Camera}
-         */
-        this.camera;
-
-        /**
          * @type {EntityManager}
          */
         this.entityManager = new EntityManager();
@@ -38,6 +22,17 @@ export class GameManager {
          * @type {InputManager}
          */
         this.inputManager = new InputManager();
+
+        /**
+         * @type {Camera}
+         */
+        this.camera = new Camera(this);
+
+        /**
+         * @type {Player}
+         */
+        this.player = new Player(50, 50, "red", this);
+        this.entityManager.add(this.player);
 
         /**
          * @type {Array<typeof Room>}
@@ -69,7 +64,7 @@ export class GameManager {
      */
     render(ctx) {
         this.camera.render(ctx);
-        this.background.render(ctx);
         this.entityManager.render(ctx);
+        this.camera.render(ctx, true);
     }
 }

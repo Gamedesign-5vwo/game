@@ -7,3 +7,4 @@ Thomas, 15-5-2021, 1 uur, Veranderd naar state manager (overzichtelijker)
 Thomas, 15-5-2021, 40 minuten, Camera langzaam/smooth
 Thomas, 16-5-2021, 30 minuten, Puzzle meerdere soorten + state veranderd naar room
 Thomas, 16-5-2021, 20 minuten, Layers toegevoegd aan renderen
+Thomas, 16-5-2021, 1 uur, Wat kamer dingen veranderd voor het renderen

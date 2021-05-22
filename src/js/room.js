@@ -10,7 +10,12 @@ export class Room {
      */
     constructor(gameManager) {
         this.gameManager = gameManager;
+        this.entities = [];
     }
 
-    init() {}
+    init() {
+        for (let i = 0; i < this.entities.length; i++) {
+            this.gameManager.entityManager.add(this.entities[i]);
+        }
+    }
 }

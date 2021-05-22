@@ -14,7 +14,7 @@ export class Background extends Entity {
      * @param {string} color
      */
     constructor(x, y, width, height, color) {
-        super(x, y, width, height, RENDER_LAYERS.background);
+        super(x, y, width, height, RENDER_LAYERS.background, false);
         this.color = color;
     }
 

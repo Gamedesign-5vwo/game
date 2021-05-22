@@ -57,6 +57,7 @@ export class EntityManager {
             prev[curr.layer].push(curr);
             return prev;
         }, {});
+
         for (const layerName in RENDER_LAYERS) {
             if (!layers[RENDER_LAYERS[layerName]]) continue;
             for (let i = 0; i < layers[RENDER_LAYERS[layerName]].length; i++) {

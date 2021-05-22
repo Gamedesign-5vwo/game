@@ -70,7 +70,8 @@ export class Camera {
     /**
      * @param {CanvasRenderingContext2D} ctx
      */
-    render(ctx) {
-        ctx.translate(-this.x, -this.y);
+    render(ctx, reset = false) {
+        if (reset) ctx.translate(this.x, this.y);
+        else ctx.translate(-this.x, -this.y);
     }
 }
