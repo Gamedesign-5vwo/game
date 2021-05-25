@@ -16,10 +16,7 @@ export const PUZZLE_POSITION = {
     8: { x: 2, y: 2 },
 };
 
-export const PUZZLE_SIZE = {
-    width: 20,
-    height: 20,
-};
+export const PUZZLE_SIZE = 15;
 
 /**
  * @param {CanvasRenderingContext2D} ctx
@@ -28,18 +25,16 @@ export const PUZZLE_SIZE = {
 export function renderPuzzlePart(ctx, part) {
     const position = PUZZLE_POSITION[part.type];
 
-    const puzzleImg = new Image();
-    puzzleImg.src = part.puzzleImg;
     ctx.drawImage(
-        puzzleImg,
-        PUZZLE_SIZE.width * position.x,
-        PUZZLE_SIZE.height * position.y,
-        PUZZLE_SIZE.width,
-        PUZZLE_SIZE.height,
+        part.puzzleImg,
+        PUZZLE_SIZE * position.x,
+        PUZZLE_SIZE * position.y,
+        PUZZLE_SIZE,
+        PUZZLE_SIZE,
         part.x,
         part.y,
-        PUZZLE_SIZE.width,
-        PUZZLE_SIZE.height
+        PUZZLE_SIZE,
+        PUZZLE_SIZE
     );
 }
 
@@ -63,19 +58,20 @@ export class Puzzle extends Entity {
         super(
             x,
             y,
-            20 * 3 + 40,
-            20 * 3 + 40,
+            PUZZLE_SIZE * 3 + 30,
+            PUZZLE_SIZE * 3 + 30,
             RENDER_LAYERS.floor_decoration,
             false
         );
         this.player = player;
         this.reward = reward;
-        this.puzzleImg = puzzleImg;
+        this.puzzleImg = new Image();
+        this.puzzleImg.src = puzzleImg;
         this.entityManager = entityManager;
 
         this.parts = parts.map((type) => {
             const position = this.typeToPosition(type);
-            return new PuzzlePart(position.x, position.y, type, this.puzzleImg);
+            return new PuzzlePart(position.x, position.y, type, puzzleImg);
         });
 
         // Als item wordt losgelaten kijk of het puzzle stuk is
@@ -92,8 +88,8 @@ export class Puzzle extends Entity {
             let columns = [];
             for (const type in PUZZLE_POSITION) {
                 const position = this.typeToPosition(parseInt(type));
-                rows.push(position.y + PUZZLE_SIZE.height / 2);
-                columns.push(position.x + PUZZLE_SIZE.width / 2);
+                rows.push(position.y + PUZZLE_SIZE / 2);
+                columns.push(position.x + PUZZLE_SIZE / 2);
             }
 
             // Find dichtsbijzijnde plek (https://stackoverflow.com/questions/8584902/get-the-closest-number-out-of-an-array)
@@ -104,7 +100,7 @@ export class Puzzle extends Entity {
                         ? curr
                         : prev;
                 }) -
-                PUZZLE_SIZE.height / 2;
+                PUZZLE_SIZE / 2;
 
             const closestColumn =
                 columns.reduce((prev, curr) => {
@@ -113,7 +109,7 @@ export class Puzzle extends Entity {
                         ? curr
                         : prev;
                 }) -
-                PUZZLE_SIZE.width / 2;
+                PUZZLE_SIZE / 2;
 
             // Is er al een part op die positie?
             const hasPartAtPosition = this.parts.find(
@@ -163,8 +159,8 @@ export class Puzzle extends Entity {
      */
     typeToPosition(type) {
         return {
-            x: PUZZLE_POSITION[type].x * PUZZLE_SIZE.width + this.x + 20,
-            y: PUZZLE_POSITION[type].y * PUZZLE_SIZE.height + this.y + 20,
+            x: PUZZLE_POSITION[type].x * PUZZLE_SIZE + this.x + PUZZLE_SIZE,
+            y: PUZZLE_POSITION[type].y * PUZZLE_SIZE + this.y + PUZZLE_SIZE,
         };
     }
 
@@ -183,7 +179,7 @@ export class Puzzle extends Entity {
             if (part.x !== position.x || part.y !== position.y) return false;
 
             // Kijk of het onderdeel is van de juiste puzzle
-            if (part.puzzleImg !== this.puzzleImg) return false;
+            if (part.puzzleImg.src !== this.puzzleImg.src) return false;
         }
         // Anders true
         return true;
@@ -204,7 +200,7 @@ export class Puzzle extends Entity {
     render(ctx) {
         // Maak buiten kant (geen strokeRect omdat de lijn aan de binnenkant moet zitten)
         ctx.strokeStyle = "brown";
-        ctx.lineWidth = 20;
+        ctx.lineWidth = PUZZLE_SIZE;
         ctx.beginPath();
         ctx.moveTo(this.x, this.y + ctx.lineWidth / 2);
         ctx.lineTo(this.x + this.width, this.y + ctx.lineWidth / 2);

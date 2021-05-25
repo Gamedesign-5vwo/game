@@ -1,6 +1,5 @@
-import { Entity } from "../entity.js";
-import { EntityManager, RENDER_LAYERS } from "../managers/entity_manager.js";
-import { InputManager } from "../managers/input_manager.js";
+import { EntitySprite } from "../entity.js";
+import { RENDER_LAYERS } from "../managers/entity_manager.js";
 import { GameManager } from "../managers/game_manager.js";
 import { Item } from "./item.js";
 
@@ -12,7 +11,7 @@ export const STOP_PLAYER_ITEM = "stop_player_item";
  * color (de kleur van de speler)
  * gameManager (de state manager)
  **************************************************/
-export class Player extends Entity {
+export class Player extends EntitySprite {
     /**
      * @param {number} x
      * @param {number} y
@@ -20,7 +19,7 @@ export class Player extends Entity {
      * @param {GameManager} gameManager
      */
     constructor(x, y, color, gameManager) {
-        super(x, y, 25, 25 * 2, RENDER_LAYERS.player);
+        super(x, y, 25, 25 * 2, "./images/player.png", RENDER_LAYERS.player);
 
         this.color = color;
         this.gameManager = gameManager;
@@ -164,13 +163,5 @@ export class Player extends Entity {
             this.inhand.entity.x = this.x;
             this.inhand.entity.y = this.y;
         }
-    }
-
-    /**
-     * @param {CanvasRenderingContext2D} ctx
-     */
-    render(ctx) {
-        ctx.fillStyle = this.color;
-        ctx.fillRect(this.x, this.y, this.width, this.height);
     }
 }

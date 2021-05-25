@@ -15,9 +15,11 @@ export class PuzzlePart extends Item {
      * @param {string} puzzleImg
      */
     constructor(x, y, type, puzzleImg) {
-        super(x, y, PUZZLE_SIZE.width, PUZZLE_SIZE.height);
+        super(x, y, PUZZLE_SIZE, PUZZLE_SIZE);
         this.type = type;
-        this.puzzleImg = puzzleImg;
+
+        this.puzzleImg = new Image();
+        this.puzzleImg.src = puzzleImg;
     }
 
     /**

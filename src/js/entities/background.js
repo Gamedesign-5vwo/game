@@ -3,7 +3,6 @@ import { RENDER_LAYERS } from "../managers/entity_manager.js";
 /**************************************************
  * Klasse: Background
  * x, y (positie van de linkerbovenhoek)
- * color (de kleur van de background)
  **************************************************/
 export class Background extends EntitySprite {
     /**
@@ -11,18 +10,16 @@ export class Background extends EntitySprite {
      * @param {number} y
      * @param {number} width
      * @param {number} height
-     * @param {string} color
      */
-    constructor(x, y, width, height, color) {
+    constructor(x, y, width, height) {
         super(
             x,
             y,
             width,
             height,
-            "./images/strandbal.png",
+            "./images/planks.png",
             RENDER_LAYERS.background,
             false
         );
-        this.color = color;
     }
 }

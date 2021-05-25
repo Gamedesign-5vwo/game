@@ -146,6 +146,8 @@ export class EntitySprite extends Entity {
         canCollide = true
     ) {
         super(x, y, width, height, layer, canCollide);
+
+        // Laad image en als hij geladen is maak een pattern
         const img = new Image();
         img.src = image;
         img.addEventListener("load", () => {
@@ -161,6 +163,10 @@ export class EntitySprite extends Entity {
     render(ctx) {
         if (!this.pattern) return;
         ctx.fillStyle = this.pattern;
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+
+        // We kunnen niet direct een x,y in voeren omdat het dan ook de locatie op het pattern aanpast.
+        ctx.translate(this.x, this.y);
+        ctx.fillRect(0, 0, this.width, this.height);
+        ctx.translate(-this.x, -this.y);
     }
 }
