@@ -4,6 +4,7 @@ import { RENDER_LAYERS } from "./managers/entity_manager.js";
  * Klasse: Entity
  * x, y (positie van de linkerbovenhoek)
  * width, height (de grootte van de entity)
+ * layer (welke render layer is de entity)
  * canCollide (heeft de entity collision default naar true)
  **************************************************/
 export class Entity {
@@ -115,4 +116,51 @@ export class Entity {
      * @param {CanvasRenderingContext2D} ctx
      */
     render(ctx) {}
+}
+
+/**************************************************
+ * Klasse: EntitySprite
+ * x, y (positie van de linkerbovenhoek)
+ * width, height (de grootte van de entity)
+ * image (de path naar de image)
+ * layer (welke render layer is de entity)
+ * canCollide (heeft de entity collision default naar true)
+ **************************************************/
+export class EntitySprite extends Entity {
+    /**
+     * @param {number} x
+     * @param {number} y
+     * @param {number} width
+     * @param {number} height
+     * @param {string} image
+     * @param {number} layer
+     * @param {boolean} canCollide
+     */
+    constructor(
+        x,
+        y,
+        width,
+        height,
+        image,
+        layer = RENDER_LAYERS.floor_decoration,
+        canCollide = true
+    ) {
+        super(x, y, width, height, layer, canCollide);
+        const img = new Image();
+        img.src = image;
+        img.addEventListener("load", () => {
+            const patternCanvas = document.createElement("canvas");
+            const patternContext = patternCanvas.getContext("2d");
+            this.pattern = patternContext.createPattern(img, "repeat");
+        });
+    }
+
+    /**
+     * @param {CanvasRenderingContext2D} ctx
+     */
+    render(ctx) {
+        if (!this.pattern) return;
+        ctx.fillStyle = this.pattern;
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+    }
 }

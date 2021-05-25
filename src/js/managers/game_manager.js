@@ -1,9 +1,11 @@
 import { Camera } from "../camera.js";
 import { Player } from "../entities/player.js";
+import { Timer } from "../hud/timer.js";
 import { Room } from "../room.js";
 import { RoomOne } from "../rooms/room_one.js";
-import { RoomTwo } from "../rooms/room_two.js";
+import { RoomHallway } from "../rooms/room_hallway.js";
 import { EntityManager } from "./entity_manager.js";
+import { HudManager } from "./hud_manager.js";
 import { InputManager } from "./input_manager.js";
 
 export class GameManager {
@@ -12,6 +14,11 @@ export class GameManager {
          * @type {number}
          */
         this.currentState;
+
+        /**
+         * @type {HudManager}
+         */
+        this.hudManager = new HudManager(this);
 
         /**
          * @type {EntityManager}
@@ -37,12 +44,14 @@ export class GameManager {
         /**
          * @type {Array<typeof Room>}
          */
-        this.rooms = [RoomOne, RoomTwo];
+        this.rooms = [RoomOne, RoomHallway];
 
         for (let i = 0; i < this.rooms.length; i++) {
             const room = new this.rooms[i](this);
             room.init();
         }
+
+        this.hudManager.add(new Timer(this, 60 * 5));
 
         this.setState(0);
     }
@@ -57,6 +66,7 @@ export class GameManager {
     update() {
         this.camera.update();
         this.entityManager.update();
+        this.hudManager.update();
     }
 
     /**
@@ -66,5 +76,6 @@ export class GameManager {
         this.camera.render(ctx);
         this.entityManager.render(ctx);
         this.camera.render(ctx, true);
+        this.hudManager.render(ctx);
     }
 }
