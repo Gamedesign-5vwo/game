@@ -9,3 +9,4 @@ Thomas, 16-5-2021, 30 minuten, Puzzle meerdere soorten + state veranderd naar ro
 Thomas, 16-5-2021, 20 minuten, Layers toegevoegd aan renderen
 Thomas, 16-5-2021, 1 uur, Wat kamer dingen veranderd voor het renderen
 Thomas, 25-5-2021, 3 uur, Image entity + hud + timer
+Thomas, 25-5-2021, 2 uur, Wat test sprites toegevoegd + puzzle en items kleiner
