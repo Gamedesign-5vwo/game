@@ -8,20 +8,17 @@ export const STOP_PLAYER_ITEM = "stop_player_item";
 /**************************************************
  * Klasse: Player
  * x, y (positie van de linkerbovenhoek)
- * color (de kleur van de speler)
  * gameManager (de state manager)
  **************************************************/
 export class Player extends EntitySprite {
     /**
      * @param {number} x
      * @param {number} y
-     * @param {string} color
      * @param {GameManager} gameManager
      */
-    constructor(x, y, color, gameManager) {
+    constructor(x, y, gameManager) {
         super(x, y, 25, 25 * 2, "./images/player.png", RENDER_LAYERS.player);
 
-        this.color = color;
         this.gameManager = gameManager;
 
         this.listeners = { pre_item_check: [], post_item_check: [] };

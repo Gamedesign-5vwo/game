@@ -2,19 +2,18 @@ import { Background } from "../entities/background.js";
 import { Door } from "../entities/door.js";
 import { Key } from "../entities/items/key.js";
 import { PuzzlePart } from "../entities/items/puzzle_part.js";
-import { Player } from "../entities/player.js";
 import { Puzzle } from "../entities/puzzle.js";
 import { Wall } from "../entities/wall.js";
 import { Room } from "../room.js";
 
 /**************************************************
- * Klasse: RoomOne
+ * Klasse: PuzzleRoom
  * gameManager (gameManager)
  **************************************************/
-export class RoomOne extends Room {
+export class PuzzleRoom extends Room {
     init() {
         //Add enities
-        this.entities.push(new Background(0, 0, 1025, 725, "#c2b280"));
+        this.entities.push(new Background(0, 0, 1025, 725));
 
         //Puzzle
         this.entities.push(
@@ -58,13 +57,13 @@ export class RoomOne extends Room {
 
         //Muren
         //boven
-        this.entities.push(new Wall(0, 0, 41, 1, "blue"));
+        this.entities.push(new Wall(0, 0, 41, 1));
         //onder
-        this.entities.push(new Wall(0, 25 * 28, 41, 1, "blue"));
+        this.entities.push(new Wall(0, 25 * 28, 41, 1));
         //links
-        this.entities.push(new Wall(0, 25, 1, 27, "blue"));
+        this.entities.push(new Wall(0, 25, 1, 27));
         //rechts
-        this.entities.push(new Wall(25 * 40, 25, 1, 12, "blue"));
+        this.entities.push(new Wall(25 * 40, 25, 1, 12));
         this.entities.push(
             new Door(
                 25 * 40,
@@ -79,7 +78,7 @@ export class RoomOne extends Room {
                 this.gameManager
             )
         );
-        this.entities.push(new Wall(25 * 40, 25 * 16, 1, 12, "blue"));
+        this.entities.push(new Wall(25 * 40, 25 * 16, 1, 12));
         super.init();
     }
 }

@@ -1,3 +1,4 @@
+import { Background } from "../entities/background.js";
 import { Wall } from "../entities/wall.js";
 import { Room } from "../room.js";
 
@@ -9,13 +10,16 @@ export class RoomHallway extends Room {
     init() {
         //Add room hallway
         //Muren
-        //boven
-        // this.entities.push(new Wall(25 * 40, 25 * -41, 41, 1, "blue"));
-        //onder
-        // this.entities.push(new Wall(25 * 40, 25 * 28, 41, 1, "blue"));
         //links
-        // this.entities.push(new Wall(25 * 40, 25, 1, 27, "blue"));
+        this.entities.push(new Wall(25 * 40, 25 * -4, 1, 4));
+        this.entities.push(new Wall(25 * 40, 25 * 29, 1, 4));
+
         //rechts
-        // this.entities.push(new Wall(25 * 40, 25, 1, 12, "blue"));
+        this.entities.push(new Wall(25 * 50, 25 * -4, 1, 37));
+
+        ///Vloer
+        this.entities.push(new Background(25 * 40, 25 * -4, 25 * 11, 25 * 37));
+
+        super.init();
     }
 }

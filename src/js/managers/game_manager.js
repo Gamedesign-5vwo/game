@@ -2,7 +2,8 @@ import { Camera } from "../camera.js";
 import { Player } from "../entities/player.js";
 import { Timer } from "../hud/timer.js";
 import { Room } from "../room.js";
-import { RoomOne } from "../rooms/room_one.js";
+import { MazeRoomOne } from "../rooms/maze_room_one.js";
+import { PuzzleRoom } from "../rooms/puzzle_room.js";
 import { RoomHallway } from "../rooms/room_hallway.js";
 import { EntityManager } from "./entity_manager.js";
 import { HudManager } from "./hud_manager.js";
@@ -38,13 +39,13 @@ export class GameManager {
         /**
          * @type {Player}
          */
-        this.player = new Player(50, 50, "red", this);
+        this.player = new Player(50, 50, this);
         this.entityManager.add(this.player);
 
         /**
          * @type {Array<typeof Room>}
          */
-        this.rooms = [RoomOne, RoomHallway];
+        this.rooms = [PuzzleRoom, RoomHallway, MazeRoomOne];
 
         for (let i = 0; i < this.rooms.length; i++) {
             const room = new this.rooms[i](this);
