@@ -24,8 +24,11 @@ export class Strandbal extends Entity {
         this.image.src = "./images/strandbal.png";
     }
 
-    update() {
-        super.update();
+    /**
+     * @param {number} dt 
+     */
+    update(dt) {
+        super.update(dt);
 
         const entities = this.gameManager.entityManager.entities.filter(
             (entity) => entity.canCollide && entity !== this

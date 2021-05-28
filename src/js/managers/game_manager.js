@@ -17,6 +17,11 @@ export class GameManager {
         this.currentState;
 
         /**
+         * @type {number}
+         */
+        this.lastTime = Date.now();
+
+        /**
          * @type {HudManager}
          */
         this.hudManager = new HudManager(this);
@@ -65,8 +70,10 @@ export class GameManager {
     }
 
     update() {
+        const dt = Date.now() - this.lastTime;
+        this.lastTime = Date.now();
         this.camera.update();
-        this.entityManager.update();
+        this.entityManager.update(dt);
         this.hudManager.update();
     }
 

@@ -66,7 +66,7 @@ export class Player extends EntitySprite {
             }
         });
 
-        this.speed = 2;
+        this.speed = 0.2;
     }
 
     /**
@@ -113,8 +113,12 @@ export class Player extends EntitySprite {
         return false;
     }
 
-    update() {
-        super.update();
+    /**
+     * @param {number} dt 
+     */
+    update(dt) {
+        super.update(dt);
+
         // Input check
         if (
             this.gameManager.inputManager.isKeydown(87) &&
