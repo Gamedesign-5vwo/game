@@ -18,3 +18,4 @@ Rick, 25-5-2021, 2 uur + 45 minuten, Uitleg + praten over de ideëen
 Thomas, 28-5-2021, 1 uur, Speler niet afhankelijk van snelheid pc
 Mick, 28-5-2021, 1 uur, Speler niet afhankelijk van snelheid pc
 Daan, 28-5-2021, 1 uur, Speler niet afhankelijk van snelheid pc
+Thomas, 29-5-2021, 3 uur, Splashscreen + music

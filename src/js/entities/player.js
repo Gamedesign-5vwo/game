@@ -27,6 +27,8 @@ export class Player extends EntitySprite {
         this.inhand = null;
         // Als E wordt losgelaten verwissel item
         this.gameManager.inputManager.addListener(69, () => {
+            if (!this.gameManager.started) return;
+
             for (let i = 0; i < this.listeners.pre_item_check.length; i++) {
                 if (
                     this.listeners.pre_item_check[i].listener() ===
@@ -114,38 +116,41 @@ export class Player extends EntitySprite {
     }
 
     /**
-     * @param {number} dt 
+     * @param {number} dt
      */
     update(dt) {
         super.update(dt);
 
-        // Input check
-        if (
-            this.gameManager.inputManager.isKeydown(87) &&
-            !this.gameManager.inputManager.isKeydown(83)
-        ) {
-            this.dy = -this.speed;
-        } else if (
-            this.gameManager.inputManager.isKeydown(83) &&
-            !this.gameManager.inputManager.isKeydown(87)
-        ) {
-            this.dy = this.speed;
-        } else {
-            this.dy = 0;
-        }
+        // Alleen bewegen als begonnen
+        if (this.gameManager.started) {
+            // Input check
+            if (
+                this.gameManager.inputManager.isKeydown(87) &&
+                !this.gameManager.inputManager.isKeydown(83)
+            ) {
+                this.dy = -this.speed;
+            } else if (
+                this.gameManager.inputManager.isKeydown(83) &&
+                !this.gameManager.inputManager.isKeydown(87)
+            ) {
+                this.dy = this.speed;
+            } else {
+                this.dy = 0;
+            }
 
-        if (
-            this.gameManager.inputManager.isKeydown(68) &&
-            !this.gameManager.inputManager.isKeydown(65)
-        ) {
-            this.dx = this.speed;
-        } else if (
-            this.gameManager.inputManager.isKeydown(65) &&
-            !this.gameManager.inputManager.isKeydown(68)
-        ) {
-            this.dx = -this.speed;
-        } else {
-            this.dx = 0;
+            if (
+                this.gameManager.inputManager.isKeydown(68) &&
+                !this.gameManager.inputManager.isKeydown(65)
+            ) {
+                this.dx = this.speed;
+            } else if (
+                this.gameManager.inputManager.isKeydown(65) &&
+                !this.gameManager.inputManager.isKeydown(68)
+            ) {
+                this.dx = -this.speed;
+            } else {
+                this.dx = 0;
+            }
         }
 
         // Collision check
