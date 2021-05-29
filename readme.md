@@ -19,3 +19,4 @@ Thomas, 28-5-2021, 1 uur, Speler niet afhankelijk van snelheid pc
 Mick, 28-5-2021, 1 uur, Speler niet afhankelijk van snelheid pc
 Daan, 28-5-2021, 1 uur, Speler niet afhankelijk van snelheid pc
 Thomas, 29-5-2021, 3 uur, Splashscreen + music
+Thomas, 29-5-2021, 1 uur + 30 minuten, Functionaliteid rock

@@ -11,7 +11,12 @@ import { HudManager } from "./hud_manager.js";
 import { InputManager } from "./input_manager.js";
 
 export class GameManager {
-    constructor() {
+    constructor(spelbord) {
+        /**
+         * @type {HTMLCanvasElement}
+         */
+
+        this.spelbord = spelbord;
         /**
          * @type {boolean}
          */
@@ -40,7 +45,7 @@ export class GameManager {
         /**
          * @type {InputManager}
          */
-        this.inputManager = new InputManager();
+        this.inputManager = new InputManager(this);
 
         /**
          * @type {Camera}

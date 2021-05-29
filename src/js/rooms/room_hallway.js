@@ -1,4 +1,5 @@
 import { Background } from "../entities/background.js";
+import { Rock } from "../entities/rock.js";
 import { Wall } from "../entities/wall.js";
 import { Room } from "../room.js";
 
@@ -19,6 +20,8 @@ export class RoomHallway extends Room {
 
         ///Vloer
         this.entities.push(new Background(25 * 40, 25 * -4, 25 * 11, 25 * 37));
+
+        this.entities.push(new Rock(25 * 40, 25 * 1, this.gameManager));
 
         super.init();
     }

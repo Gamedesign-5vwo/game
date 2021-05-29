@@ -94,7 +94,7 @@ window.onload = function () {
     // De context van het spelbord opvragen
     ctx = spelbord.getContext("2d");
 
-    gameManager = new GameManager();
+    gameManager = new GameManager(spelbord);
 
     // start de game loop
     gameloop();

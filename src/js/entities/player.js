@@ -26,7 +26,7 @@ export class Player extends EntitySprite {
 
         this.inhand = null;
         // Als E wordt losgelaten verwissel item
-        this.gameManager.inputManager.addListener(69, () => {
+        this.gameManager.inputManager.addKeyListener(69, () => {
             if (!this.gameManager.started) return;
 
             for (let i = 0; i < this.listeners.pre_item_check.length; i++) {
