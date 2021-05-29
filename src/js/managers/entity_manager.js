@@ -16,6 +16,9 @@ export const RENDER_LAYERS = {
  **************************************************/
 export class EntityManager {
     constructor() {
+        /**
+         * @type {Array<Entity>}
+         */
         this.entities = [];
     }
 
@@ -39,9 +42,12 @@ export class EntityManager {
         return true;
     }
 
-    update() {
+    /**
+     * @param {number} dt 
+     */
+    update(dt) {
         for (let i = 0; i < this.entities.length; i++) {
-            this.entities[i].update();
+            this.entities[i].update(dt);
         }
     }
 

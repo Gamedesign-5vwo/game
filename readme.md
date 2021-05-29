@@ -15,3 +15,6 @@ Mick, 25-5-2021, 4 uur, Uitleg + praten over de ideëen + kamers maken
 Luuk, 25-5-2021, 4 uur, Uitleg + praten over de ideëen + kamers maken
 Daan, 25-5-2021, 3 uur + 45 minuten, Uitleg + praten over de ideëen + kamer maken
 Rick, 25-5-2021, 2 uur + 45 minuten, Uitleg + praten over de ideëen
+Thomas, 28-5-2021, 1 uur, Speler niet afhankelijk van snelheid pc
+Mick, 28-5-2021, 1 uur, Speler niet afhankelijk van snelheid pc
+Daan, 28-5-2021, 1 uur, Speler niet afhankelijk van snelheid pc

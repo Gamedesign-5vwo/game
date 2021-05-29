@@ -105,10 +105,13 @@ export class Entity {
         }
     }
 
-    //Verplaats de entity met dx,dy
-    update() {
-        this.x += this.dx;
-        this.y += this.dy;
+    /**
+     * Verplaats de entity met dx,dy
+     * @param {number} dt 
+     */
+    update(dt) {
+        this.x += this.dx * dt;
+        this.y += this.dy * dt;
     }
 
     /**
