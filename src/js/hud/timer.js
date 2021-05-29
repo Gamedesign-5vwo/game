@@ -6,9 +6,10 @@ import { Hud } from "../hud.js";
  * time (tijd in seconden)
  **************************************************/
 export class Timer extends Hud {
-    constructor(gameManager, time) {
+    constructor(gameManager, time, done) {
         super(gameManager);
         this.time = time;
+        this.done = done;
         this.lastTime = Date.now();
     }
 
@@ -16,6 +17,11 @@ export class Timer extends Hud {
     update() {
         this.time -= (Date.now() - this.lastTime) / 1000;
         this.lastTime = Date.now();
+
+        if (this.time <= 0) {
+            this.gameManager.hudManager.remove(this);
+            this.done();
+        }
     }
 
     /**

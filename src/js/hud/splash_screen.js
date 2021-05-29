@@ -7,9 +7,17 @@ import { Hud } from "../hud.js";
  * showTime (seconden om text te laten zien)
  * background (string van locatie afbeelding)
  * done (functie die gecalled wordt als de splashscreen klaar is)
+ * showImageLonger (laat de afbeelding zonder tekst langer zien)
  **************************************************/
 export class SplashScreen extends Hud {
-    constructor(gameManager, text, showTime, background, done) {
+    constructor(
+        gameManager,
+        text,
+        showTime,
+        background,
+        done,
+        showImageLonger = 0
+    ) {
         super(gameManager);
         /**
          * @type {Array<string>}
@@ -32,6 +40,11 @@ export class SplashScreen extends Hud {
          */
         this.done = done;
 
+        /**
+         * @type {number}
+         */
+        this.showImageLonger = showImageLonger;
+
         this.lastTime = Date.now();
         this.time = 0;
     }
@@ -41,7 +54,11 @@ export class SplashScreen extends Hud {
         this.lastTime = Date.now();
 
         // Kijk of alle tekst is geweest en dan nog 5 seconden
-        if (Math.floor((this.time - 5) / this.showTime) >= this.text.length) {
+        if (
+            Math.floor(
+                (this.time - 5 - this.showImageLonger) / this.showTime
+            ) >= this.text.length
+        ) {
             this.gameManager.hudManager.remove(this);
             this.done();
         }
@@ -103,7 +120,10 @@ export class SplashScreen extends Hud {
         ctx.globalAlpha =
             currentText >= this.text.length
                 ? 1 -
-                  (this.time - this.text.length * this.showTime) / this.showTime
+                  (this.time -
+                      this.text.length * this.showTime +
+                      this.showImageLonger) /
+                      this.showTime
                 : 1;
         ctx.drawImage(this.background, 0, 0, 1025, 725);
 
