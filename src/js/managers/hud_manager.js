@@ -1,10 +1,14 @@
 import { Hud } from "../hud.js";
+import { GameManager } from "./game_manager.js";
 
 /**************************************************
  * Klasse: HudManager
  * gameManager (game manager)
  **************************************************/
 export class HudManager {
+    /**
+     * @param {GameManager} gameManager
+     */
     constructor(gameManager) {
         this.gameManager = gameManager;
         this.huds = [];

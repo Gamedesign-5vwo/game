@@ -1,10 +1,12 @@
 import { Camera } from "../camera.js";
 import { Player } from "../entities/player.js";
+import { Lifes } from "../hud/lifes.js";
 import { SplashScreen } from "../hud/splash_screen.js";
 import { Timer } from "../hud/timer.js";
 import { Room } from "../room.js";
 import { MazeRoomOne } from "../rooms/maze_room_one.js";
 import { PuzzleRoom } from "../rooms/puzzle_room.js";
+import { RoomCrossingTheRoad } from "../rooms/room_crossing_the_road.js";
 import { RoomHallway } from "../rooms/room_hallway.js";
 import { EntityManager } from "./entity_manager.js";
 import { HudManager } from "./hud_manager.js";
@@ -70,20 +72,26 @@ export class GameManager {
         /**
          * @type {Player}
          */
-        this.player = new Player(50, 50, this);
+        // TODO: terug naar 50,50
+        this.player = new Player(25 * 30, 25 * -4, this);
         this.entityManager.add(this.player);
 
         /**
-         * @type {Array<typeof Room>}
+         * @type {Array<Room>}
          */
-        this.rooms = [PuzzleRoom, RoomHallway, MazeRoomOne];
+        this.rooms = [
+            new PuzzleRoom(this, 0, 0),
+            new RoomHallway(this, 25 * 40, 25 * -4),
+            new MazeRoomOne(this, 25 * 30, 25 * 33),
+            new RoomCrossingTheRoad(this, 25 * 30, 25 * -36),
+        ];
 
         for (let i = 0; i < this.rooms.length; i++) {
-            const room = new this.rooms[i](this);
-            room.init();
+            this.rooms[i].init();
         }
 
-        this.setState(0);
+        //TODO: terug naar 0
+        this.setState(2);
 
         // Levens updaten vanuit link
         const lifes = new URL(window.location.href).searchParams.get("lifes");
@@ -135,6 +143,7 @@ export class GameManager {
                 this.setGameOver();
             })
         );
+        this.hudManager.add(new Lifes(this));
 
         // Start achtergrond muziek
         const music = new Audio("./media/background.mp3");

@@ -5,15 +5,20 @@ import { GameManager } from "../managers/game_manager.js";
 /**************************************************
  * Klasse: Rock
  * x, y (positie van de linkerbovenhoek)
+ * minX, maxX minimuen en maximum x waarde
+ * speed (snelheid van de steen)
  * gameManager (game manager)
  **************************************************/
 export class Rock extends EntitySprite {
     /**
      * @param {number} x
      * @param {number} y
+     * @param {number} minX
+     * @param {number} maxX
+     * @param {number} speed
      * @param {GameManager} gameManager
      */
-    constructor(x, y, gameManager) {
+    constructor(x, y, minX, maxX, speed, gameManager) {
         super(
             x,
             y,
@@ -24,22 +29,12 @@ export class Rock extends EntitySprite {
             false
         );
 
+        this.minX = minX;
+        this.maxX = maxX - this.width;
+
+        this.dx = speed;
+
         this.gameManager = gameManager;
-        this.hasPlayer = false;
-
-        this.gameManager.inputManager.addMouseListener((entities, event) => {
-            if (!entities.includes(this)) return;
-
-            /** @type {Array<Rock>}*/ (
-                this.gameManager.entityManager.entities.filter(
-                    (entity) => entity instanceof Rock && entity.hasPlayer
-                )
-            ).forEach((rock) => {
-                rock.hasPlayer = false;
-            });
-
-            this.hasPlayer = true;
-        });
     }
 
     /**
@@ -48,9 +43,11 @@ export class Rock extends EntitySprite {
     update(dt) {
         super.update(dt);
 
-        if (!this.hasPlayer) return;
-
-        this.gameManager.player.x = this.centerX;
-        this.gameManager.player.y = this.centerY;
+        // Ga andere kant op
+        if (!(this.x > this.minX && this.x < this.maxX)) {
+            if (this.x < this.minX) this.x = this.minX;
+            if (this.x > this.maxX) this.x = this.maxX;
+            this.dx = -this.dx;
+        }
     }
 }

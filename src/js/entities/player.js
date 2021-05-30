@@ -2,6 +2,7 @@ import { EntitySprite } from "../entity.js";
 import { RENDER_LAYERS } from "../managers/entity_manager.js";
 import { GameManager } from "../managers/game_manager.js";
 import { Item } from "./item.js";
+import { Rock } from "./rock.js";
 
 export const STOP_PLAYER_ITEM = "stop_player_item";
 
@@ -20,6 +21,11 @@ export class Player extends EntitySprite {
         super(x, y, 25, 25 * 2, "./images/player.png", RENDER_LAYERS.player);
 
         this.gameManager = gameManager;
+
+        /**
+         * @type {number}
+         */
+        this.mouseDown = null;
 
         this.listeners = { pre_item_check: [], post_item_check: [] };
         this.listenerId = 0;
@@ -66,6 +72,18 @@ export class Player extends EntitySprite {
             for (let i = 0; i < this.listeners.post_item_check.length; i++) {
                 this.listeners.post_item_check[i].listener();
             }
+        });
+
+        this.gameManager.inputManager.addMouseListener(
+            "down",
+            (x, y, entities, event) => {
+                if (this.gameManager.currentState !== 2) return;
+                this.mouseDown = event.button;
+            }
+        );
+
+        this.gameManager.inputManager.addMouseListener("up", () => {
+            this.mouseDown = null;
         });
 
         this.speed = 0.2;
@@ -124,32 +142,42 @@ export class Player extends EntitySprite {
         // Alleen bewegen als begonnen
         if (this.gameManager.started) {
             // Input check
-            if (
-                this.gameManager.inputManager.isKeydown(87) &&
-                !this.gameManager.inputManager.isKeydown(83)
-            ) {
-                this.dy = -this.speed;
-            } else if (
-                this.gameManager.inputManager.isKeydown(83) &&
-                !this.gameManager.inputManager.isKeydown(87)
-            ) {
-                this.dy = this.speed;
+            if (this.gameManager.currentState === 2) {
+                if (this.mouseDown === 0) {
+                    this.dy = -this.speed;
+                } else if (this.mouseDown === 2) {
+                    this.dy = this.speed;
+                } else {
+                    this.dy = 0;
+                }
             } else {
-                this.dy = 0;
-            }
+                if (
+                    this.gameManager.inputManager.isKeydown(87) &&
+                    !this.gameManager.inputManager.isKeydown(83)
+                ) {
+                    this.dy = -this.speed;
+                } else if (
+                    this.gameManager.inputManager.isKeydown(83) &&
+                    !this.gameManager.inputManager.isKeydown(87)
+                ) {
+                    this.dy = this.speed;
+                } else {
+                    this.dy = 0;
+                }
 
-            if (
-                this.gameManager.inputManager.isKeydown(68) &&
-                !this.gameManager.inputManager.isKeydown(65)
-            ) {
-                this.dx = this.speed;
-            } else if (
-                this.gameManager.inputManager.isKeydown(65) &&
-                !this.gameManager.inputManager.isKeydown(68)
-            ) {
-                this.dx = -this.speed;
-            } else {
-                this.dx = 0;
+                if (
+                    this.gameManager.inputManager.isKeydown(68) &&
+                    !this.gameManager.inputManager.isKeydown(65)
+                ) {
+                    this.dx = this.speed;
+                } else if (
+                    this.gameManager.inputManager.isKeydown(65) &&
+                    !this.gameManager.inputManager.isKeydown(68)
+                ) {
+                    this.dx = -this.speed;
+                } else {
+                    this.dx = 0;
+                }
             }
         }
 
@@ -161,6 +189,19 @@ export class Player extends EntitySprite {
             const entity = entities[i];
             if (this.collides(entity)) {
                 this.collide(entity);
+            }
+        }
+
+        // Rock check
+        if (this.gameManager.currentState === 2 && !this.gameManager.gameOver) {
+            const rocks = this.gameManager.entityManager.entities.filter(
+                (entity) => entity instanceof Rock
+            );
+            for (let i = 0; i < rocks.length; i++) {
+                const rock = rocks[i];
+                if (this.collides(rock)) {
+                    this.gameManager.setGameOver();
+                }
             }
         }
 

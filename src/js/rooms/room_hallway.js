@@ -12,16 +12,14 @@ export class RoomHallway extends Room {
         //Add room hallway
         //Muren
         //links
-        this.entities.push(new Wall(25 * 40, 25 * -4, 1, 4));
-        this.entities.push(new Wall(25 * 40, 25 * 29, 1, 4));
+        this.entities.push(new Wall(0, 0, 1, 4));
+        this.entities.push(new Wall(0, 25 * 33, 1, 4));
 
         //rechts
-        this.entities.push(new Wall(25 * 50, 25 * -4, 1, 37));
+        this.entities.push(new Wall(25 * 10, 0, 1, 37));
 
         ///Vloer
-        this.entities.push(new Background(25 * 40, 25 * -4, 25 * 11, 25 * 37));
-
-        this.entities.push(new Rock(25 * 40, 25 * 1, this.gameManager));
+        this.entities.push(new Background(0, 0, 25 * 11, 25 * 37));
 
         super.init();
     }

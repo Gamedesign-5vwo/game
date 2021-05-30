@@ -64,20 +64,21 @@ export class PuzzleRoom extends Room {
         this.entities.push(new Wall(0, 25, 1, 27));
         //rechts
         this.entities.push(new Wall(25 * 40, 25, 1, 12));
-        this.entities.push(
-            new Door(
-                25 * 40,
-                25 * 13,
-                1,
-                3,
-                "brown",
-                "level_1",
-                () => {
-                    this.gameManager.setState(1);
-                },
-                this.gameManager
-            )
-        );
+        //TODO: terug plaatsen
+        // this.entities.push(
+        //     new Door(
+        //         25 * 40,
+        //         25 * 13,
+        //         1,
+        //         3,
+        //         "brown",
+        //         "level_1",
+        //         () => {
+        //             this.gameManager.setState(1);
+        //         },
+        //         this.gameManager
+        //     )
+        // );
         this.entities.push(new Wall(25 * 40, 25 * 16, 1, 12));
         super.init();
     }

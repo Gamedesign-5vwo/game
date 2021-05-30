@@ -12,17 +12,17 @@ export class MazeRoomOne extends Room {
         //Muren
 
         //boven
-        this.entities.push(new Wall(25 * 30, 25 * 33, 14, 1));
-        this.entities.push(new Wall(25 * 47, 25 * 33, 14, 1));
+        this.entities.push(new Wall(0, 0, 14, 1));
+        this.entities.push(new Wall(25 * 17, 0, 14, 1));
         //onder
-        this.entities.push(new Wall(25 * 30, 25 * 63, 31, 1));
+        this.entities.push(new Wall(0, 25 * 30, 31, 1));
         //links
-        this.entities.push(new Wall(25 * 30, 25 * 33, 1, 30));
+        this.entities.push(new Wall(0, 0, 1, 30));
         //rechts
-        this.entities.push(new Wall(25 * 60, 25 * 33, 1, 30));
+        this.entities.push(new Wall(25 * 30, 0, 1, 30));
 
         //vloer
-        this.entities.push(new Background(25 * 30, 25 * 33, 25 * 30, 25 * 30));
+        this.entities.push(new Background(0, 0, 25 * 30, 25 * 30));
 
         super.init();
     }

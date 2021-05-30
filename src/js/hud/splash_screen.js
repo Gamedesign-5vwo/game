@@ -1,4 +1,5 @@
 import { Hud } from "../hud.js";
+import { GameManager } from "../managers/game_manager.js";
 
 /**************************************************
  * Klasse: SplashScreen
@@ -10,6 +11,14 @@ import { Hud } from "../hud.js";
  * showImageLonger (laat de afbeelding zonder tekst langer zien)
  **************************************************/
 export class SplashScreen extends Hud {
+    /**
+     * @param {GameManager} gameManager
+     * @param {Array<string>} text
+     * @param {number} showTime
+     * @param {string} background
+     * @param {Function} done
+     * @param {number} showImageLonger
+     */
     constructor(
         gameManager,
         text,
@@ -137,6 +146,8 @@ export class SplashScreen extends Hud {
         ctx.font = "50px Arial";
         ctx.strokeStyle = "#a52a2a";
         ctx.fillStyle = "#F2D16B";
+        ctx.miterLimit = 2;
+        ctx.lineWidth = 10;
         this.wrapText(ctx, text, 1025 / 2, 725 / 2, 900, 60);
     }
 }
