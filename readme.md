@@ -25,3 +25,5 @@ Daan, 28-5-2021, 1 uur, Speler niet afhankelijk van snelheid pc
 Thomas, 29-5-2021, 3 uur, Splashscreen + music
 Thomas, 29-5-2021, 1 uur + 30 minuten, Functionaliteid rock
 Thomas, 29-5-2021, 3 uur + 30 minuten, Start, gameover, gewonnen schermen
+
+Thomas, 30-5-2021, 4 uur, Crossing the road + kamer verbeteringen
