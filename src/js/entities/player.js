@@ -1,6 +1,9 @@
 import { EntitySprite } from "../entity.js";
+import { SplashScreen } from "../hud/splash_screen.js";
 import { RENDER_LAYERS } from "../managers/entity_manager.js";
 import { GameManager } from "../managers/game_manager.js";
+import { RoomCrossingTheRoad } from "../rooms/room_crossing_the_road.js";
+import { Background } from "./background.js";
 import { Item } from "./item.js";
 import { Rock } from "./rock.js";
 
@@ -190,6 +193,27 @@ export class Player extends EntitySprite {
             if (this.collides(entity)) {
                 this.collide(entity);
             }
+        }
+
+        // Check floor
+        if (
+            this.collides(this.gameManager.crossingTheRoad) &&
+            this.gameManager.currentState !== 2
+        ) {
+            this.gameManager.currentState = 2;
+            this.dx = 0;
+            this.dy = 0;
+            this.gameManager.hudManager.add(
+                new SplashScreen(
+                    this.gameManager,
+                    [
+                        "Gebruik nu je linker en rechter muis om omhoog en omlaag te bewegen",
+                    ],
+                    3,
+                    null,
+                    () => {}
+                )
+            );
         }
 
         // Rock check

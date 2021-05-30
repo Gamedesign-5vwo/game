@@ -41,8 +41,12 @@ export class SplashScreen extends Hud {
         /**
          * @type {HTMLImageElement}
          */
-        this.background = new Image();
-        this.background.src = background;
+        if (background) {
+            this.background = new Image();
+            this.background.src = background;
+        } else {
+            this.background = null;
+        }
 
         /**
          * @type {Function}
@@ -123,18 +127,20 @@ export class SplashScreen extends Hud {
      */
     render(ctx) {
         const currentText = Math.floor(this.time / this.showTime);
-        ctx.fillStyle = "black";
-        ctx.fillRect(0, 0, 1025, 725);
+        if (this.background) {
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, 1025, 725);
 
-        ctx.globalAlpha =
-            currentText >= this.text.length
-                ? 1 -
-                  (this.time -
-                      this.text.length * this.showTime +
-                      this.showImageLonger) /
-                      this.showTime
-                : 1;
-        ctx.drawImage(this.background, 0, 0, 1025, 725);
+            ctx.globalAlpha =
+                currentText >= this.text.length
+                    ? 1 -
+                      (this.time -
+                          this.text.length * this.showTime +
+                          this.showImageLonger) /
+                          this.showTime
+                    : 1;
+            ctx.drawImage(this.background, 0, 0, 1025, 725);
+        }
 
         if (currentText >= this.text.length) {
             ctx.globalAlpha = 1;

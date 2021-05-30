@@ -27,3 +27,4 @@ Thomas, 29-5-2021, 1 uur + 30 minuten, Functionaliteid rock
 Thomas, 29-5-2021, 3 uur + 30 minuten, Start, gameover, gewonnen schermen
 
 Thomas, 30-5-2021, 4 uur, Crossing the road + kamer verbeteringen
+Thomas, 30-5-2021, 30 minuten, Automatisch naar crossing the road camera

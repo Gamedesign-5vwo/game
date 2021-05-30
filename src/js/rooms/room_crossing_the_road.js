@@ -12,10 +12,21 @@ const random = (min, max) => {
  **************************************************/
 export class RoomCrossingTheRoad extends Room {
     init() {
+        // Start
+        this.entities.push(
+            (this.gameManager.crossingTheRoad = new Background(
+                0,
+                1525,
+                1025,
+                25,
+                "#F2D16B"
+            ))
+        );
+
         // Vloer
         this.entities.push(new Background(0, 0, 1025, 1525, "#00bfff"));
 
-        let speed = 0.6;
+        let speed = 0.3;
         for (let i = 0; i < 30; i++) {
             this.entities.push(
                 new Rock(

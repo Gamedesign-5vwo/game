@@ -1,4 +1,5 @@
 import { Camera } from "../camera.js";
+import { Background } from "../entities/background.js";
 import { Player } from "../entities/player.js";
 import { Lifes } from "../hud/lifes.js";
 import { SplashScreen } from "../hud/splash_screen.js";
@@ -72,9 +73,13 @@ export class GameManager {
         /**
          * @type {Player}
          */
-        // TODO: terug naar 50,50
-        this.player = new Player(25 * 30, 25 * -4, this);
+        this.player = new Player(50, 50, this);
         this.entityManager.add(this.player);
+
+        /**
+         * @type {Background}
+         */
+        this.crossingTheRoad;
 
         /**
          * @type {Array<Room>}
@@ -83,15 +88,14 @@ export class GameManager {
             new PuzzleRoom(this, 0, 0),
             new RoomHallway(this, 25 * 40, 25 * -4),
             new MazeRoomOne(this, 25 * 30, 25 * 33),
-            new RoomCrossingTheRoad(this, 25 * 30, 25 * -36),
+            new RoomCrossingTheRoad(this, 25 * 30, 25 * -70),
         ];
 
         for (let i = 0; i < this.rooms.length; i++) {
             this.rooms[i].init();
         }
 
-        //TODO: terug naar 0
-        this.setState(2);
+        this.setState(1);
 
         // Levens updaten vanuit link
         const lifes = new URL(window.location.href).searchParams.get("lifes");
@@ -216,21 +220,13 @@ export class GameManager {
                 "./images/gameover.png",
                 () => {
                     if (!canRetry) {
-                        this.hudManager.add(
-                            new SplashScreen(
-                                this,
-                                [""],
-                                60,
-                                "./images/gameover.png",
-                                () => {}
-                            )
-                        );
                         return;
                     }
                     const url = new URL(window.location.href);
                     url.searchParams.set("lifes", (this.lifes - 1).toString());
                     window.location.href = url.href;
-                }
+                },
+                60
             )
         );
     }

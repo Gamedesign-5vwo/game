@@ -49,9 +49,9 @@ export class Camera {
             },
             2: {
                 minX: 25 * 30,
-                minY: 25 * -38,
+                minY: -10000,
                 maxX: 25 * 30 + 1025,
-                maxY: 25 * -34 + 1525,
+                maxY: 10000,
             },
         };
     }
