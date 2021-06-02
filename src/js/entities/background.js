@@ -4,7 +4,7 @@ import { RENDER_LAYERS } from "../managers/entity_manager.js";
  * Klasse: Background
  * x, y (positie van de linkerbovenhoek)
  * width, height (groote achtergrond)
- * color (kleur)
+ * backgroud (kleur or path naar afbeelding)
  **************************************************/
 export class Background extends EntitySprite {
     /**
@@ -12,19 +12,22 @@ export class Background extends EntitySprite {
      * @param {number} y
      * @param {number} width
      * @param {number} height
-     * @param {string} color
+     * @param {string} backgroud
      */
-    constructor(x, y, width, height, color = null) {
+    constructor(x, y, width, height, backgroud = null) {
         super(
             x,
             y,
             width,
             height,
-            "./images/planks.png",
+            backgroud && !backgroud.startsWith("#")
+                ? backgroud
+                : "./images/planks.png",
             RENDER_LAYERS.background,
             false
         );
-        this.color = color;
+
+        this.color = backgroud && backgroud.startsWith("#") ? backgroud : null;
     }
 
     /**

@@ -3,6 +3,7 @@ import { SplashScreen } from "../hud/splash_screen.js";
 import { RENDER_LAYERS } from "../managers/entity_manager.js";
 import { GameManager } from "../managers/game_manager.js";
 import { RoomCrossingTheRoad } from "../rooms/room_crossing_the_road.js";
+import { RoomStrandballenOntwijken } from "../rooms/room_strandballen_ontwijken.js";
 import { Background } from "./background.js";
 import { Item } from "./item.js";
 import { Rock } from "./rock.js";
@@ -90,6 +91,7 @@ export class Player extends EntitySprite {
         });
 
         this.speed = 0.2;
+        this.addStrandballenInterval = null;
     }
 
     /**
@@ -215,9 +217,48 @@ export class Player extends EntitySprite {
                 )
             );
         }
+        // Voeg strandballen toe
+        if (
+            this.collides(this.gameManager.ontwijkStrandballen) &&
+            this.gameManager.currentState !== 3
+        ) {
+            this.gameManager.currentState = 3;
+            this.dx = 0;
+            this.dy = 0;
+            this.gameManager.hudManager.add(
+                new SplashScreen(
+                    this.gameManager,
+                    ["Je kan je toetsen weer gebruiken om te bewegen"],
+                    3,
+                    null,
+                    () => {}
+                )
+            );
+            const roomStrandballenOntwijken =
+                /** @type {RoomStrandballenOntwijken}*/ (
+                    this.gameManager.rooms.find(
+                        (room) => room instanceof RoomStrandballenOntwijken
+                    )
+                );
+            roomStrandballenOntwijken.addNewStrandballen();
+            this.addStrandballenInterval = setInterval(() => {
+                roomStrandballenOntwijken.addNewStrandballen();
+            }, 1000 * 2);
+        } else if (
+            !this.collides(this.gameManager.ontwijkStrandballen) &&
+            this.gameManager.currentState === 3 &&
+            !this.gameManager.won
+        ) {
+            // Omdat we time out hebben alvast aan zetten
+            this.gameManager.won = true;
+            // Level 3 voltooid dus gewonnen
+            setTimeout(() => {
+                this.gameManager.setWon();
+            }, 1000 * 3);
+        }
 
-        // Rock check
         if (this.gameManager.currentState === 2 && !this.gameManager.gameOver) {
+            // Rock check
             const rocks = this.gameManager.entityManager.entities.filter(
                 (entity) => entity instanceof Rock
             );

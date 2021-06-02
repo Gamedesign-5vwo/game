@@ -9,6 +9,7 @@ import { MazeRoomOne } from "../rooms/maze_room_one.js";
 import { PuzzleRoom } from "../rooms/puzzle_room.js";
 import { RoomCrossingTheRoad } from "../rooms/room_crossing_the_road.js";
 import { RoomHallway } from "../rooms/room_hallway.js";
+import { RoomStrandballenOntwijken } from "../rooms/room_strandballen_ontwijken.js";
 import { EntityManager } from "./entity_manager.js";
 import { HudManager } from "./hud_manager.js";
 import { InputManager } from "./input_manager.js";
@@ -82,6 +83,11 @@ export class GameManager {
         this.crossingTheRoad;
 
         /**
+         * @type {Background}
+         */
+        this.ontwijkStrandballen;
+
+        /**
          * @type {Array<Room>}
          */
         this.rooms = [
@@ -89,6 +95,7 @@ export class GameManager {
             new RoomHallway(this, 25 * 40, 25 * -4),
             new MazeRoomOne(this, 25 * 30, 25 * 33),
             new RoomCrossingTheRoad(this, 25 * 30, 25 * -70),
+            new RoomStrandballenOntwijken(this, 25 * 30, 25 * -140),
         ];
 
         for (let i = 0; i < this.rooms.length; i++) {
@@ -220,13 +227,21 @@ export class GameManager {
                 "./images/gameover.png",
                 () => {
                     if (!canRetry) {
+                        this.hudManager.add(
+                            new SplashScreen(
+                                this,
+                                [""],
+                                60,
+                                "./images/gameover.png",
+                                () => {}
+                            )
+                        );
                         return;
                     }
                     const url = new URL(window.location.href);
                     url.searchParams.set("lifes", (this.lifes - 1).toString());
                     window.location.href = url.href;
-                },
-                60
+                }
             )
         );
     }

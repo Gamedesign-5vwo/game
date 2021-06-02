@@ -19,12 +19,14 @@ export class RoomCrossingTheRoad extends Room {
                 1525,
                 1025,
                 25,
-                "#F2D16B"
-            ))
+                "./images/sand.png"
+            )) //"#F2D16B"
         );
 
         // Vloer
-        this.entities.push(new Background(0, 0, 1025, 1525, "#00bfff"));
+        this.entities.push(
+            new Background(0, 0, 1025, 1525, "./images/water.png")
+        ); // "#00bfff"
 
         let speed = 0.3;
         for (let i = 0; i < 30; i++) {
