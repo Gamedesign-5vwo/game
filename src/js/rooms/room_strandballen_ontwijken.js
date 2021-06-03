@@ -23,6 +23,9 @@ export class RoomStrandballenOntwijken extends Room {
 
         // Vloer
         this.entities.push(
+            new Background(0, -1500, 1025, 1525, "./images/sand.png")
+        );
+        this.entities.push(
             (this.gameManager.ontwijkStrandballen = new Background(
                 0,
                 0,

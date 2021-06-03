@@ -2,9 +2,7 @@ import { EntitySprite } from "../entity.js";
 import { SplashScreen } from "../hud/splash_screen.js";
 import { RENDER_LAYERS } from "../managers/entity_manager.js";
 import { GameManager } from "../managers/game_manager.js";
-import { RoomCrossingTheRoad } from "../rooms/room_crossing_the_road.js";
 import { RoomStrandballenOntwijken } from "../rooms/room_strandballen_ontwijken.js";
-import { Background } from "./background.js";
 import { Item } from "./item.js";
 import { Rock } from "./rock.js";
 
@@ -90,7 +88,7 @@ export class Player extends EntitySprite {
             this.mouseDown = null;
         });
 
-        this.speed = 0.2;
+        this.speed = 0.4; //0.2
         this.addStrandballenInterval = null;
     }
 
@@ -254,7 +252,7 @@ export class Player extends EntitySprite {
             // Level 3 voltooid dus gewonnen
             setTimeout(() => {
                 this.gameManager.setWon();
-            }, 1000 * 3);
+            }, 1000 * 1);
         }
 
         if (this.gameManager.currentState === 2 && !this.gameManager.gameOver) {

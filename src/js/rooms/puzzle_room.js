@@ -4,6 +4,8 @@ import { Key } from "../entities/items/key.js";
 import { PuzzlePart } from "../entities/items/puzzle_part.js";
 import { Puzzle } from "../entities/puzzle.js";
 import { Wall } from "../entities/wall.js";
+import { EntitySprite } from "../entity.js";
+import { RENDER_LAYERS } from "../managers/entity_manager.js";
 import { Room } from "../room.js";
 
 /**************************************************
@@ -80,6 +82,30 @@ export class PuzzleRoom extends Room {
         //     )
         // );
         this.entities.push(new Wall(25 * 40, 25 * 16, 1, 12));
+
+        // Decorations
+        this.entities.push(
+            new EntitySprite(
+                25 * 2,
+                25 * 2,
+                100,
+                75,
+                "./images/rug/rug.png",
+                RENDER_LAYERS.floor_decoration,
+                false //als je er overheen kunt lopen
+            )
+        );
+
+        this.entities.push(
+            new EntitySprite(
+                25 * 15,
+                25 * 15,
+                75,
+                75,
+                "./images/desk/apple_with_chair.png",
+                RENDER_LAYERS.floor_decoration
+            )
+        );
         super.init();
     }
 }
