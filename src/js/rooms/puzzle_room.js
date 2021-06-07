@@ -118,6 +118,40 @@ export class PuzzleRoom extends Room {
             )
         );
 
+        this.entities.push(
+            new EntitySprite(
+                25 * 18,
+                25 * 18,
+                75,
+                50,
+                "./images/table/long.png",
+                RENDER_LAYERS.floor_decoration
+            )
+        );
+
+        this.entities.push(
+            new EntitySprite(
+                25 * 10,
+                25 * 10,
+                100,
+                75,
+                "./images/rug/rug.png",
+                RENDER_LAYERS.floor_decoration,
+                false //als je er overheen kunt lopen
+            )
+        );
+
+        this.entities.push(
+            new EntitySprite(
+                25 * 10,
+                25 * 1,
+                50,
+                75,
+                "./images/closet/front.png",
+                RENDER_LAYERS.floor_decoration
+            )
+        );
+
         super.init();
     }
 }
