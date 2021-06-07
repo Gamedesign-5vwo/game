@@ -46,3 +46,6 @@ Mick, 2-6-2021, 10 uur, doolhof
 Luuk, 2-6-2021, 10 uur, doolhof
 Thomas, 2-6-2021, 10 uur, doolhof
 Daan, 2-6-2021, 5 uur, doolhof + decoraties
+
+Rick, 5-6-2021, 3 uur, testen in het doolhof
+Rick, 6-6-2021, 3 uur, hele spel achter elkaar getest
