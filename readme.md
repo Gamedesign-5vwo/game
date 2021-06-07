@@ -9,6 +9,14 @@ Thomas, 15-5-2021, 40 minuten, Camera langzaam/smooth
 Thomas, 16-5-2021, 30 minuten, Puzzle meerdere soorten + state veranderd naar room
 Thomas, 16-5-2021, 20 minuten, Layers toegevoegd aan renderen
 Thomas, 16-5-2021, 1 uur, Wat kamer dingen veranderd voor het renderen
+Luuk, 16-5-2021, 5 uur, paint.net begrijpen
+
+Luuk, 18-5-2021, 2 uur, textures tekenen
+
+Luuk, 20-5-2021, 2 uur, textures tekenen
+Mick, 20-5-2021, 2 uur, scrummaster bezigheden
+
+Luuk, 22-5-2021, 2 uur, textures tekenen
 
 Thomas, 25-5-2021, 3 uur, Image entity + hud + timer
 Thomas, 25-5-2021, 2 uur, Wat test sprites toegevoegd + puzzle en items kleiner
@@ -23,7 +31,7 @@ Mick, 26-5-2021, 3 uur, tussentijds tests gedaan op bugs
 Daan, 26-5-2021, 3 uur, tussentijds tests gedaan op bugs
 
 Luuk, 27-5-2021, 3 uur + 30 minuten, Splashscreens designen + splashscreen maken
-Rick, 27-5-2021, 3 uur, Splashscreens designen
+Rick, 27-5-2021, 4 uur, Splashscreens designen + doolhof designen
 
 Thomas, 28-5-2021, 1 uur, Speler niet afhankelijk van snelheid pc
 Mick, 28-5-2021, 4 uur, Speler niet afhankelijk van snelheid pc + teksten schrijven + achtergrondmuziekje zoeken
