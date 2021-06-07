@@ -106,6 +106,18 @@ export class PuzzleRoom extends Room {
                 RENDER_LAYERS.floor_decoration
             )
         );
+
+        this.entities.push(
+            new EntitySprite(
+                25 * 17,
+                25 * 17,
+                50,
+                75,
+                "./images/bed/front.png",
+                RENDER_LAYERS.floor_decoration
+            )
+        );
+
         super.init();
     }
 }

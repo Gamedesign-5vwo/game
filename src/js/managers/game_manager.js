@@ -84,8 +84,7 @@ export class GameManager {
         /**
          * @type {Player}
          */
-        //TODO: 50,50
-        this.player = new Player(25 * -1, 25 * -23, this);
+        this.player = new Player(50, 50, this);
         this.entityManager.add(this.player);
 
         /**
