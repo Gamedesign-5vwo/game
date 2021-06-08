@@ -1,6 +1,6 @@
-import { Background } from "../entities/background.js";
-import { Wall } from "../entities/wall.js";
-import { Room } from "../room.js";
+import { Background } from '../entities/background.js';
+import { Wall } from '../entities/wall.js';
+import { Room } from '../room.js';
 
 /**************************************************
  * Klasse: RoomHallwayTwo

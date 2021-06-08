@@ -1,5 +1,5 @@
-import { Hud } from "../hud.js";
-import { GameManager } from "../managers/game_manager.js";
+import { Hud } from '../hud.js';
+import { GameManager } from '../managers/game_manager.js';
 
 /**************************************************
  * Klasse: SplashScreen
@@ -87,18 +87,18 @@ export class SplashScreen extends Hud {
      */
     wrapText(ctx, text, x, y, maxWidth, lineHeight) {
         const lines = [];
-        const words = text.split(" ");
-        let line = "";
+        const words = text.split(' ');
+        let line = '';
 
         //Elk woord
         for (let n = 0; n < words.length; n++) {
             //Kijk of lijn past anders volgende lijn
-            const testLine = line + words[n] + " ";
+            const testLine = line + words[n] + ' ';
             const metrics = ctx.measureText(testLine);
             const testWidth = metrics.width;
             if (testWidth > maxWidth && n > 0) {
                 lines.push(line);
-                line = words[n] + " ";
+                line = words[n] + ' ';
             } else {
                 line = testLine;
             }
@@ -128,7 +128,7 @@ export class SplashScreen extends Hud {
     render(ctx) {
         const currentText = Math.floor(this.time / this.showTime);
         if (this.background) {
-            ctx.fillStyle = "black";
+            ctx.fillStyle = 'black';
             ctx.fillRect(0, 0, 1025, 725);
 
             ctx.globalAlpha =
@@ -149,9 +149,9 @@ export class SplashScreen extends Hud {
 
         const text = this.text[currentText];
 
-        ctx.font = "50px Arial";
-        ctx.strokeStyle = "#a52a2a";
-        ctx.fillStyle = "#F2D16B";
+        ctx.font = '50px Arial';
+        ctx.strokeStyle = '#a52a2a';
+        ctx.fillStyle = '#F2D16B';
         ctx.miterLimit = 2;
         ctx.lineWidth = 10;
         this.wrapText(ctx, text, 1025 / 2, 725 / 2, 900, 60);

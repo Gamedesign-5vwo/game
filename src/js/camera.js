@@ -1,4 +1,4 @@
-import { GameManager } from "./managers/game_manager.js";
+import { GameManager } from './managers/game_manager.js';
 
 function clamp(value, min, max) {
     if (value < min) return min;

@@ -1,8 +1,9 @@
-import { Background } from "../entities/background.js";
-import { Wall } from "../entities/wall.js";
-import { Room } from "../room.js";
-import { EntitySprite } from "../entity.js";
-import { RENDER_LAYERS } from "../managers/entity_manager.js";
+import { Background } from '../entities/background.js';
+import { Wall } from '../entities/wall.js';
+import { Room } from '../room.js';
+import { EntitySprite } from '../entity.js';
+import { RENDER_LAYERS } from '../managers/entity_manager.js';
+import { PuzzlePart } from '../entities/items/puzzle_part.js';
 
 /**************************************************
  * Klasse: MazeRoomOne
@@ -26,13 +27,23 @@ export class MazeRoomOne extends Room {
         //vloer
         this.entities.push(new Background(0, 0, 25 * 17, 25 * 17));
 
+        // Puzzle
+        this.entities.push(
+            new PuzzlePart(
+                25 * 1.9,
+                25 * 1.5,
+                5,
+                './images/puzzles/sandcastle.png'
+            )
+        );
+
         this.entities.push(
             new EntitySprite(
                 25 * 10,
                 25 * 12,
                 75,
                 50,
-                "./images/table/long.png",
+                './images/table/long.png',
                 RENDER_LAYERS.floor_decoration
             )
         );
@@ -43,7 +54,7 @@ export class MazeRoomOne extends Room {
                 25 * 12,
                 25,
                 50,
-                "./images/chair/left.png",
+                './images/chair/left.png',
                 RENDER_LAYERS.floor_decoration
             )
         );
@@ -54,7 +65,7 @@ export class MazeRoomOne extends Room {
                 25 * 12,
                 25,
                 50,
-                "./images/chair/right.png",
+                './images/chair/right.png',
                 RENDER_LAYERS.floor_decoration
             )
         );
@@ -65,7 +76,7 @@ export class MazeRoomOne extends Room {
                 25 * 10,
                 25,
                 50,
-                "./images/chair/front.png",
+                './images/chair/front.png',
                 RENDER_LAYERS.floor_decoration
             )
         );
@@ -76,7 +87,7 @@ export class MazeRoomOne extends Room {
                 25 * 13,
                 25,
                 50,
-                "./images/chair/rear.png",
+                './images/chair/rear.png',
                 RENDER_LAYERS.floor_decoration
             )
         );
@@ -87,7 +98,7 @@ export class MazeRoomOne extends Room {
                 25 * 1,
                 50,
                 100,
-                "./images/bed.png",
+                './images/bed.png',
                 RENDER_LAYERS.floor_decoration
             )
         );

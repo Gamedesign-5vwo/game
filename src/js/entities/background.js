@@ -1,5 +1,5 @@
-import { EntitySprite } from "../entity.js";
-import { RENDER_LAYERS } from "../managers/entity_manager.js";
+import { EntitySprite } from '../entity.js';
+import { RENDER_LAYERS } from '../managers/entity_manager.js';
 /**************************************************
  * Klasse: Background
  * x, y (positie van de linkerbovenhoek)
@@ -20,14 +20,14 @@ export class Background extends EntitySprite {
             y,
             width,
             height,
-            backgroud && !backgroud.startsWith("#")
+            backgroud && !backgroud.startsWith('#')
                 ? backgroud
-                : "./images/planks.png",
+                : './images/planks.png',
             RENDER_LAYERS.background,
             false
         );
 
-        this.color = backgroud && backgroud.startsWith("#") ? backgroud : null;
+        this.color = backgroud && backgroud.startsWith('#') ? backgroud : null;
     }
 
     /**

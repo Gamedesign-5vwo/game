@@ -1,5 +1,5 @@
-import { Item } from "../item.js";
-import { PUZZLE_SIZE, renderPuzzlePart } from "../puzzle.js";
+import { Item } from '../item.js';
+import { PUZZLE_SIZE, renderPuzzlePart } from '../puzzle.js';
 
 /**************************************************
  * Klasse: Key
@@ -22,7 +22,7 @@ export class Key extends Item {
      */
     render(ctx) {
         const keyImg = new Image();
-        keyImg.src = "./images/key.png";
+        keyImg.src = './images/key.png';
         ctx.drawImage(keyImg, this.x, this.y, this.width, this.height);
     }
 }

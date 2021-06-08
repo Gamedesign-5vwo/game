@@ -1,5 +1,5 @@
-import { Entity } from "../entity.js";
-import { RENDER_LAYERS } from "../managers/entity_manager.js";
+import { Entity } from '../entity.js';
+import { RENDER_LAYERS } from '../managers/entity_manager.js';
 
 /**************************************************
  * Klasse: Item
@@ -14,6 +14,6 @@ export class Item extends Entity {
      * @param {number} height
      */
     constructor(x, y, width = 15, height = 15) {
-        super(x, y, width, height, RENDER_LAYERS.furniture_decoration, false);
+        super(x, y, width, height, RENDER_LAYERS.floor_decoration, false);
     }
 }

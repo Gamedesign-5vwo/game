@@ -1,4 +1,4 @@
-import { GameManager } from "./managers/game_manager.js";
+import { GameManager } from './managers/game_manager.js';
 
 /**************************************************
  * Klasse: Room

@@ -1,5 +1,5 @@
-import { EntitySprite } from "../entity.js";
-import { RENDER_LAYERS } from "../managers/entity_manager.js";
+import { EntitySprite } from '../entity.js';
+import { RENDER_LAYERS } from '../managers/entity_manager.js';
 
 /**************************************************
  * Klasse: Wall
@@ -19,7 +19,7 @@ export class Wall extends EntitySprite {
             y,
             25 * width,
             25 * height,
-            "./images/sand.png",
+            './images/sand.png',
             RENDER_LAYERS.wall
         );
     }

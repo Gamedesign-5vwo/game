@@ -1,12 +1,12 @@
-import { EntitySprite } from "../entity.js";
-import { SplashScreen } from "../hud/splash_screen.js";
-import { RENDER_LAYERS } from "../managers/entity_manager.js";
-import { GameManager } from "../managers/game_manager.js";
-import { RoomStrandballenOntwijken } from "../rooms/room_strandballen_ontwijken.js";
-import { Item } from "./item.js";
-import { Rock } from "./rock.js";
+import { EntitySprite } from '../entity.js';
+import { SplashScreen } from '../hud/splash_screen.js';
+import { RENDER_LAYERS } from '../managers/entity_manager.js';
+import { GameManager } from '../managers/game_manager.js';
+import { RoomStrandballenOntwijken } from '../rooms/room_strandballen_ontwijken.js';
+import { Item } from './item.js';
+import { Rock } from './rock.js';
 
-export const STOP_PLAYER_ITEM = "stop_player_item";
+export const STOP_PLAYER_ITEM = 'stop_player_item';
 
 /**************************************************
  * Klasse: Player
@@ -20,7 +20,7 @@ export class Player extends EntitySprite {
      * @param {GameManager} gameManager
      */
     constructor(x, y, gameManager) {
-        super(x, y, 25, 25 * 2, "./images/player.png", RENDER_LAYERS.player);
+        super(x, y, 25, 25 * 2, './images/player.png', RENDER_LAYERS.player);
 
         this.gameManager = gameManager;
 
@@ -77,18 +77,18 @@ export class Player extends EntitySprite {
         });
 
         this.gameManager.inputManager.addMouseListener(
-            "down",
+            'down',
             (x, y, entities, event) => {
                 if (this.gameManager.currentState !== 2) return;
                 this.mouseDown = event.button;
             }
         );
 
-        this.gameManager.inputManager.addMouseListener("up", () => {
+        this.gameManager.inputManager.addMouseListener('up', () => {
             this.mouseDown = null;
         });
 
-        this.speed = 0.4; //0.2
+        this.speed = 0.25;
         this.addStrandballenInterval = null;
     }
 
@@ -207,7 +207,7 @@ export class Player extends EntitySprite {
                 new SplashScreen(
                     this.gameManager,
                     [
-                        "Gebruik nu je linker en rechter muis om omhoog en omlaag te bewegen",
+                        'Gebruik nu je linker en rechter muis om omhoog en omlaag te bewegen',
                     ],
                     3,
                     null,
@@ -226,7 +226,7 @@ export class Player extends EntitySprite {
             this.gameManager.hudManager.add(
                 new SplashScreen(
                     this.gameManager,
-                    ["Je kan je toetsen weer gebruiken om te bewegen"],
+                    ['Je kan je toetsen weer gebruiken om te bewegen'],
                     3,
                     null,
                     () => {}

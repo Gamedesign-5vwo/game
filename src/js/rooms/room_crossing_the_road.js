@@ -1,6 +1,6 @@
-import { Background } from "../entities/background.js";
-import { Rock } from "../entities/rock.js";
-import { Room } from "../room.js";
+import { Background } from '../entities/background.js';
+import { Rock } from '../entities/rock.js';
+import { Room } from '../room.js';
 
 const random = (min, max) => {
     return Math.floor(Math.random() * max) + min;
@@ -19,13 +19,13 @@ export class RoomCrossingTheRoad extends Room {
                 1525,
                 1025,
                 25,
-                "./images/sand.png"
+                './images/sand.png'
             )) //"#F2D16B"
         );
 
         // Vloer
         this.entities.push(
-            new Background(0, 0, 1025, 1525, "./images/water.png")
+            new Background(0, 0, 1025, 1525, './images/water.png')
         ); // "#00bfff"
 
         let speed = 0.3;

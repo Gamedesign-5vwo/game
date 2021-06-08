@@ -1,28 +1,28 @@
-import { Camera } from "../camera.js";
-import { Background } from "../entities/background.js";
-import { Player } from "../entities/player.js";
-import { Lifes } from "../hud/lifes.js";
-import { SplashScreen } from "../hud/splash_screen.js";
-import { Timer } from "../hud/timer.js";
-import { Room } from "../room.js";
-import { MazeRoomFive } from "../rooms/maze_room_five.js";
-import { MazeRoomFour } from "../rooms/maze_room_four.js";
-import { MazeRoomOne } from "../rooms/maze_room_one.js";
-import { MazeRoomThree } from "../rooms/maze_room_three.js";
-import { MazeRoomTwo } from "../rooms/maze_room_two.js";
-import { PuzzleRoom } from "../rooms/puzzle_room.js";
-import { RoomCrossingTheRoad } from "../rooms/room_crossing_the_road.js";
-import { RoomHallwayFive } from "../rooms/room_hallway_five.js";
-import { RoomHallwayFour } from "../rooms/room_hallway_four.js";
-import { RoomHallwayOne } from "../rooms/room_hallway_one.js";
-import { RoomHallwaySeven } from "../rooms/room_hallway_seven.js";
-import { RoomHallwaySix } from "../rooms/room_hallway_six.js";
-import { RoomHallwayThree } from "../rooms/room_hallway_three.js";
-import { RoomHallwayTwo } from "../rooms/room_hallway_two.js";
-import { RoomStrandballenOntwijken } from "../rooms/room_strandballen_ontwijken.js";
-import { EntityManager } from "./entity_manager.js";
-import { HudManager } from "./hud_manager.js";
-import { InputManager } from "./input_manager.js";
+import { Camera } from '../camera.js';
+import { Background } from '../entities/background.js';
+import { Player } from '../entities/player.js';
+import { Lifes } from '../hud/lifes.js';
+import { SplashScreen } from '../hud/splash_screen.js';
+import { Timer } from '../hud/timer.js';
+import { Room } from '../room.js';
+import { MazeRoomFive } from '../rooms/maze_room_five.js';
+import { MazeRoomFour } from '../rooms/maze_room_four.js';
+import { MazeRoomOne } from '../rooms/maze_room_one.js';
+import { MazeRoomThree } from '../rooms/maze_room_three.js';
+import { MazeRoomTwo } from '../rooms/maze_room_two.js';
+import { PuzzleRoom } from '../rooms/puzzle_room.js';
+import { RoomCrossingTheRoad } from '../rooms/room_crossing_the_road.js';
+import { RoomHallwayFive } from '../rooms/room_hallway_five.js';
+import { RoomHallwayFour } from '../rooms/room_hallway_four.js';
+import { RoomHallwayOne } from '../rooms/room_hallway_one.js';
+import { RoomHallwaySeven } from '../rooms/room_hallway_seven.js';
+import { RoomHallwaySix } from '../rooms/room_hallway_six.js';
+import { RoomHallwayThree } from '../rooms/room_hallway_three.js';
+import { RoomHallwayTwo } from '../rooms/room_hallway_two.js';
+import { RoomStrandballenOntwijken } from '../rooms/room_strandballen_ontwijken.js';
+import { EntityManager } from './entity_manager.js';
+import { HudManager } from './hud_manager.js';
+import { InputManager } from './input_manager.js';
 
 export class GameManager {
     constructor(spelbord) {
@@ -129,38 +129,38 @@ export class GameManager {
         this.setState(1);
 
         // Levens updaten vanuit link
-        const lifes = new URL(window.location.href).searchParams.get("lifes");
+        const lifes = new URL(window.location.href).searchParams.get('lifes');
         if (lifes) {
             // Pak het nummer uit de link als dat niet lukt maak het 3
             this.lifes = Number.parseInt(lifes) || 3;
         }
 
-        const start = document.getElementById("start");
+        const start = document.getElementById('start');
         if (this.lifes !== 3) {
             // Als al een keer gespeeld is geen intro en heb ook nog geluid
             start.remove();
             this.start();
         } else {
             // Intro wanneer er op start is gedrukt (moet omdat we audio willen afspelen)
-            start.addEventListener("click", () => {
+            start.addEventListener('click', () => {
                 start.remove();
-                const introSound = new Audio("./media/zandkasteel_intro.mp3");
+                const introSound = new Audio('./media/zandkasteel_intro.mp3');
                 introSound.volume = 0.3;
                 introSound.play();
                 this.hudManager.add(
                     new SplashScreen(
                         this,
                         [
-                            "Hallo bewoner van het Zandkasteel!",
-                            "Er is een probleem. Het water staat hoog en gaat binnenkort het zandkasteel overstromen.",
-                            "De rest van het zandkasteel is al lang weg alleen jij hebt je verslapen en ligt nog in je bed. Het water is bijna hier dus je moet hier zo snel mogelijk weg!",
-                            "Daarvoor moet je eerst door een paar kamers heen. De deur van je slaapkamer zit op slot dus je moet eerst de sleutel vinden.",
-                            "Je hebt nog 10 minuten om van het eiland af te komen dus schiet op! Als de 10 minuten om zijn moet je namelijk weer opnieuw beginnen.",
-                            "Je mag drie pogingen doen, daarna ben je game over. Je speelt met de toetsen WASD en je pakt dingen op met de toets E. Als je wilt springen over rotsen doe je dat met je muis.",
-                            "Veel plezier!",
+                            'Hallo bewoner van het Zandkasteel!',
+                            'Er is een probleem. Het water staat hoog en gaat binnenkort het zandkasteel overstromen.',
+                            'De rest van het zandkasteel is al lang weg alleen jij hebt je verslapen en ligt nog in je bed. Het water is bijna hier dus je moet hier zo snel mogelijk weg!',
+                            'Daarvoor moet je eerst door een paar kamers heen. De deur van je slaapkamer zit op slot dus je moet eerst de sleutel vinden.',
+                            'Je hebt nog 10 minuten om van het eiland af te komen dus schiet op! Als de 10 minuten om zijn moet je namelijk weer opnieuw beginnen.',
+                            'Je mag drie pogingen doen, daarna ben je game over. Je speelt met de toetsen WASD en je pakt dingen op met de toets E. Als je wilt springen over rotsen doe je dat met je muis.',
+                            'Veel plezier!',
                         ],
                         5,
-                        "./images/welkom.png",
+                        './images/welkom.png',
                         () => {
                             this.start();
                         }
@@ -181,9 +181,12 @@ export class GameManager {
         this.hudManager.add(new Lifes(this));
 
         // Start achtergrond muziek
-        const music = new Audio("./media/background.mp3");
+        const music = new Audio('./media/background.mp3');
         music.volume = 0.1;
         music.play();
+        music.addEventListener('ended', () => {
+            music.play();
+        });
 
         this.music = music;
 
@@ -195,8 +198,8 @@ export class GameManager {
         this.won = true;
         this.music.pause();
 
-        const introSound = new Audio("./media/zandkasteel_intro.mp3");
-        introSound.addEventListener("ended", () => {
+        const introSound = new Audio('./media/zandkasteel_intro.mp3');
+        introSound.addEventListener('ended', () => {
             introSound.play();
         });
         introSound.volume = 0.3;
@@ -206,19 +209,19 @@ export class GameManager {
             new SplashScreen(
                 this,
                 [
-                    "Gefeliciteerd je bent van het eiland afgekomen zonder onder water komen te staan! Je bent nu weer veilig terug bij de andere inwoners van het zandkasteel.",
+                    'Gefeliciteerd je bent van het eiland afgekomen zonder onder water komen te staan! Je bent nu weer veilig terug bij de andere inwoners van het zandkasteel.',
                 ],
                 10,
-                "./images/gewonnen.png",
+                './images/gewonnen.png',
                 () => {
                     this.hudManager.add(
                         new SplashScreen(
                             this,
                             [
-                                "Waarom ben je nog steeds hier. Je hebt al gewonnen hoor!",
+                                'Waarom ben je nog steeds hier. Je hebt al gewonnen hoor!',
                             ],
                             60 * 2,
-                            "./images/gewonnen.png",
+                            './images/gewonnen.png',
                             () => {}
                         )
                     );
@@ -237,8 +240,8 @@ export class GameManager {
         this.gameOver = true;
         this.music.pause();
 
-        const introSound = new Audio("./media/zandkasteel_intro.mp3");
-        introSound.addEventListener("ended", () => {
+        const introSound = new Audio('./media/zandkasteel_intro.mp3');
+        introSound.addEventListener('ended', () => {
             introSound.play();
         });
         introSound.volume = 0.3;
@@ -250,27 +253,27 @@ export class GameManager {
                 [
                     `Helaas, je hebt het niet gehaald. Het water is te hoog, je bent game over. ${
                         canRetry
-                            ? "Begin nu opnieuw."
-                            : "Al je levens zijn op en je bent verdronken."
+                            ? 'Begin nu opnieuw.'
+                            : 'Al je levens zijn op en je bent verdronken.'
                     }`,
                 ],
                 5,
-                "./images/gameover.png",
+                './images/gameover.png',
                 () => {
                     if (!canRetry) {
                         this.hudManager.add(
                             new SplashScreen(
                                 this,
-                                [""],
+                                [''],
                                 60,
-                                "./images/gameover.png",
+                                './images/gameover.png',
                                 () => {}
                             )
                         );
                         return;
                     }
                     const url = new URL(window.location.href);
-                    url.searchParams.set("lifes", (this.lifes - 1).toString());
+                    url.searchParams.set('lifes', (this.lifes - 1).toString());
                     window.location.href = url.href;
                 }
             )

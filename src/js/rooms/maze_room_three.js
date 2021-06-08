@@ -1,8 +1,9 @@
-import { Background } from "../entities/background.js";
-import { Wall } from "../entities/wall.js";
-import { Room } from "../room.js";
-import { EntitySprite } from "../entity.js";
-import { RENDER_LAYERS } from "../managers/entity_manager.js";
+import { Background } from '../entities/background.js';
+import { Wall } from '../entities/wall.js';
+import { Room } from '../room.js';
+import { EntitySprite } from '../entity.js';
+import { RENDER_LAYERS } from '../managers/entity_manager.js';
+import { PuzzlePart } from '../entities/items/puzzle_part.js';
 
 /**************************************************
  * Klasse: MazeRoomThree
@@ -29,24 +30,42 @@ export class MazeRoomThree extends Room {
         //vloer
         this.entities.push(new Background(0, 0, 25 * 17, 25 * 17));
 
+        // Puzzle
+        this.entities.push(
+            new PuzzlePart(
+                25 * 13,
+                25 * 15.2,
+                1,
+                './images/puzzles/sandcastle.png'
+            )
+        );
+        this.entities.push(
+            new PuzzlePart(
+                25 * 15,
+                25 * 3.5,
+                4,
+                './images/puzzles/sandcastle.png'
+            )
+        );
+
         this.entities.push(
             new EntitySprite(
                 25 * 13,
                 25 * 13,
                 75,
                 60,
-                "./images/bed/right.png",
+                './images/bed/right.png',
                 RENDER_LAYERS.floor_decoration
             )
         );
-        
+
         this.entities.push(
             new EntitySprite(
                 25 * 4,
                 25 * 4,
                 75,
                 50,
-                "./images/table/long.png",
+                './images/table/long.png',
                 RENDER_LAYERS.floor_decoration
             )
         );
@@ -57,7 +76,7 @@ export class MazeRoomThree extends Room {
                 25 * 4,
                 25,
                 50,
-                "./images/chair/left.png",
+                './images/chair/left.png',
                 RENDER_LAYERS.floor_decoration
             )
         );
@@ -68,7 +87,7 @@ export class MazeRoomThree extends Room {
                 25 * 4,
                 25,
                 50,
-                "./images/chair/right.png",
+                './images/chair/right.png',
                 RENDER_LAYERS.floor_decoration
             )
         );
@@ -79,7 +98,7 @@ export class MazeRoomThree extends Room {
                 25 * 2,
                 25,
                 50,
-                "./images/chair/front.png",
+                './images/chair/front.png',
                 RENDER_LAYERS.floor_decoration
             )
         );
@@ -90,24 +109,22 @@ export class MazeRoomThree extends Room {
                 25 * 5,
                 25,
                 50,
-                "./images/chair/rear.png",
+                './images/chair/rear.png',
                 RENDER_LAYERS.floor_decoration
             )
         );
 
-        
         this.entities.push(
             new EntitySprite(
                 25 * 14,
                 25 * 1,
                 50,
                 75,
-                "./images/closet/front.png",
+                './images/closet/front.png',
                 RENDER_LAYERS.floor_decoration
             )
         );
 
         super.init();
     }
-    
 }

@@ -1,5 +1,5 @@
-import { Hud } from "../hud.js";
-import { GameManager } from "./game_manager.js";
+import { Hud } from '../hud.js';
+import { GameManager } from './game_manager.js';
 
 /**************************************************
  * Klasse: HudManager

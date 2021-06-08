@@ -1,5 +1,5 @@
-import { Item } from "../item.js";
-import { PUZZLE_SIZE, renderPuzzlePart } from "../puzzle.js";
+import { Item } from '../item.js';
+import { PUZZLE_SIZE, renderPuzzlePart } from '../puzzle.js';
 
 /**************************************************
  * Klasse: PuzzlePart

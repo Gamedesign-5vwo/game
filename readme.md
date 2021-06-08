@@ -57,3 +57,6 @@ Daan, 2-6-2021, 5 uur, doolhof + decoraties
 
 Rick, 5-6-2021, 3 uur, testen in het doolhof
 Rick, 6-6-2021, 3 uur, hele spel achter elkaar getest
+
+Daan, 8-6-2021, ??????, Daan decoratie doolhof
+Thomas, 8-6-2021, 5 uur, daan's decoratie checken en prettier + puzzle stukjes verstoppen

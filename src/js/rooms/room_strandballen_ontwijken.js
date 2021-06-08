@@ -1,8 +1,8 @@
-import { Background } from "../entities/background.js";
-import { Rock } from "../entities/rock.js";
-import { Strandbal } from "../entities/strandbal.js";
-import { Wall } from "../entities/wall.js";
-import { Room } from "../room.js";
+import { Background } from '../entities/background.js';
+import { Rock } from '../entities/rock.js';
+import { Strandbal } from '../entities/strandbal.js';
+import { Wall } from '../entities/wall.js';
+import { Room } from '../room.js';
 
 const random = (min, max) => {
     return Math.floor(Math.random() * max) + min;
@@ -23,7 +23,7 @@ export class RoomStrandballenOntwijken extends Room {
 
         // Vloer
         this.entities.push(
-            new Background(0, -1500, 1025, 1525, "./images/sand.png")
+            new Background(0, -1500, 1025, 1525, './images/sand.png')
         );
         this.entities.push(
             (this.gameManager.ontwijkStrandballen = new Background(
@@ -31,7 +31,7 @@ export class RoomStrandballenOntwijken extends Room {
                 0,
                 1025,
                 1525,
-                "./images/sand.png"
+                './images/sand.png'
             ))
         );
 

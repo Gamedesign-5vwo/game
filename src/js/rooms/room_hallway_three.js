@@ -1,6 +1,7 @@
-import { Background } from "../entities/background.js";
-import { Wall } from "../entities/wall.js";
-import { Room } from "../room.js";
+import { Background } from '../entities/background.js';
+import { PuzzlePart } from '../entities/items/puzzle_part.js';
+import { Wall } from '../entities/wall.js';
+import { Room } from '../room.js';
 
 /**************************************************
  * Klasse: RoomHallwayThree
@@ -41,6 +42,16 @@ export class RoomHallwayThree extends Room {
         this.entities.push(new Background(-7 * 25, -50 * 25, 25 * 3, 25 * 52));
         this.entities.push(new Background(-30 * 25, -50 * 25, 25 * 24, 25 * 3));
         this.entities.push(new Background(-38 * 25, -25 * 25, 25 * 34, 25 * 3));
+
+        // Puzzle
+        this.entities.push(
+            new PuzzlePart(
+                -28 * 25,
+                -49 * 25,
+                6,
+                './images/puzzles/sandcastle.png'
+            )
+        );
 
         super.init();
     }

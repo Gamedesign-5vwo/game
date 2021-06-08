@@ -1,5 +1,5 @@
-import { Hud } from "../hud.js";
-import { GameManager } from "../managers/game_manager.js";
+import { Hud } from '../hud.js';
+import { GameManager } from '../managers/game_manager.js';
 
 /**************************************************
  * Klasse: Timer
@@ -37,14 +37,14 @@ export class Timer extends Hud {
         let minutes = Math.floor(this.time / 60);
         let second = Math.floor(this.time - minutes * 60).toString();
         if (second.length < 2) {
-            second = "0" + second;
+            second = '0' + second;
         }
-        const timeString = minutes + ":" + second;
-        ctx.font = "50px Arial";
+        const timeString = minutes + ':' + second;
+        ctx.font = '50px Arial';
         const size = ctx.measureText(timeString);
 
-        ctx.fillStyle = "#F2D16B";
-        ctx.strokeStyle = "#a52a2a";
+        ctx.fillStyle = '#F2D16B';
+        ctx.strokeStyle = '#a52a2a';
         ctx.miterLimit = 2;
         ctx.lineWidth = 10;
         ctx.strokeText(timeString, 1025 / 2 - size.width / 2, 47);

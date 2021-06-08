@@ -1,7 +1,7 @@
-import { Entity } from "../entity.js";
-import { RENDER_LAYERS } from "../managers/entity_manager.js";
-import { GameManager } from "../managers/game_manager.js";
-import { Player } from "./player.js";
+import { Entity } from '../entity.js';
+import { RENDER_LAYERS } from '../managers/entity_manager.js';
+import { GameManager } from '../managers/game_manager.js';
+import { Player } from './player.js';
 
 /**************************************************
  * Klasse: Strandbal
@@ -22,7 +22,7 @@ export class Strandbal extends Entity {
         this.dy = fallingSpeed;
 
         this.image = new Image();
-        this.image.src = "./images/strandbal.png";
+        this.image.src = './images/strandbal.png';
     }
 
     /**

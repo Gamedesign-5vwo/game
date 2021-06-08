@@ -1,5 +1,5 @@
-import { Entity } from "../entity.js";
-import { GameManager } from "./game_manager.js";
+import { Entity } from '../entity.js';
+import { GameManager } from './game_manager.js';
 
 /**************************************************
  * Klasse: InputManager
@@ -23,11 +23,11 @@ export class InputManager {
         };
         this.mouseListenerId = 0;
 
-        window.addEventListener("keydown", (e) =>
+        window.addEventListener('keydown', (e) =>
             this.keysdown.push(e.keyCode)
         );
 
-        window.addEventListener("keyup", (e) => {
+        window.addEventListener('keyup', (e) => {
             this.keysdown.splice(this.keysdown.indexOf(e.keyCode));
             const list = this.keyListener[e.keyCode];
             if (list) {
@@ -35,21 +35,21 @@ export class InputManager {
             }
         });
 
-        window.addEventListener("mousedown", (e) => {
+        window.addEventListener('mousedown', (e) => {
             const data = this.getDataFromMouse(e);
             this.mouseListeners.down.forEach(({ id, mouseListener }) => {
                 mouseListener(data.x, data.y, data.entities, e);
             });
         });
 
-        window.addEventListener("mouseup", (e) => {
+        window.addEventListener('mouseup', (e) => {
             const data = this.getDataFromMouse(e);
             this.mouseListeners.up.forEach(({ id, mouseListener }) => {
                 mouseListener(data.x, data.y, data.entities, e);
             });
         });
 
-        window.addEventListener("click", (e) => {
+        window.addEventListener('click', (e) => {
             const data = this.getDataFromMouse(e);
             this.mouseListeners.click.forEach(({ id, mouseListener }) => {
                 mouseListener(data.x, data.y, data.entities, e);

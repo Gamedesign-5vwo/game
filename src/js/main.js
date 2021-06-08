@@ -40,7 +40,7 @@ var gameManager;
  * autootjes en wat je maar wilt.
  * Hieronder een klasse om de achtergrond te tekenen.
  **************************************************/
-import { GameManager } from "./managers/game_manager.js";
+import { GameManager } from './managers/game_manager.js';
 
 /**************************************************
  * Game loop
@@ -67,7 +67,7 @@ function update() {
 function clearSpelbord() {
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, spelbord.width, spelbord.height);
-    ctx.fillStyle = "black";
+    ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, spelbord.width, spelbord.height);
 }
 
@@ -88,11 +88,11 @@ function render(ctx) {
 window.onload = function () {
     // Het canvas element voor het spelbord ophalen
     spelbord = /** @type {HTMLCanvasElement} */ (
-        document.getElementById("game")
+        document.getElementById('game')
     );
 
     // De context van het spelbord opvragen
-    ctx = spelbord.getContext("2d");
+    ctx = spelbord.getContext('2d');
 
     gameManager = new GameManager(spelbord);
 

@@ -1,14 +1,13 @@
-import { Entity } from "../entity.js";
-import { RENDER_LAYERS } from "../managers/entity_manager.js";
-import { GameManager } from "../managers/game_manager.js";
-import { Key } from "./items/key.js";
-import { STOP_PLAYER_ITEM } from "./player.js";
+import { Entity } from '../entity.js';
+import { RENDER_LAYERS } from '../managers/entity_manager.js';
+import { GameManager } from '../managers/game_manager.js';
+import { Key } from './items/key.js';
+import { STOP_PLAYER_ITEM } from './player.js';
 
 /**************************************************
  * Klasse: Door
  * x, y (positie van de linkerbovenhoek)
  * width, height (de grootte van de muur per tile (25))
- * color (de kleur van de deur)
  * id (welke deur)
  * gameManager (de gameManager)
  **************************************************/
@@ -18,15 +17,27 @@ export class Door extends Entity {
      * @param {number} y
      * @param {number} width
      * @param {number} height
-     * @param {string} color
      * @param {string} id
      * @param {Function} onOpened
      * @param {GameManager} gameManager
      */
-    constructor(x, y, width, height, color, id, onOpened, gameManager) {
+    constructor(x, y, width, height, id, onOpened, gameManager) {
         super(x, y, 25 * width, 25 * height, RENDER_LAYERS.wall);
 
-        this.color = color;
+        //Horizontal
+        if (width > height) {
+            this.imgClosed = new Image();
+            this.imgClosed.src = './images/doors/h_closed.png';
+            this.imgOpened = new Image();
+            this.imgOpened.src = './images/doors/h_open_t.png';
+        } else {
+            // Vertical
+            this.imgClosed = new Image();
+            this.imgClosed.src = './images/doors/v_closed.png';
+            this.imgOpened = new Image();
+            this.imgOpened.src = './images/doors/v_open_l.png';
+        }
+
         this.id = id;
         this.onOpened = onOpened;
         this.gameManager = gameManager;
@@ -46,7 +57,7 @@ export class Door extends Entity {
             this.gameManager.entityManager.remove(
                 this.gameManager.player.inhand.entity
             );
-            this.gameManager.entityManager.remove(this);
+            this.canCollide = false;
             this.gameManager.player.inhand = null;
 
             //Voer onopend uit
@@ -60,7 +71,12 @@ export class Door extends Entity {
      * @param {CanvasRenderingContext2D} ctx
      */
     render(ctx) {
-        ctx.fillStyle = this.color;
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.drawImage(
+            this.canCollide ? this.imgClosed : this.imgOpened,
+            this.x,
+            this.y,
+            this.width,
+            this.height
+        );
     }
 }

@@ -1,4 +1,4 @@
-import { Entity } from "../entity.js";
+import { Entity } from '../entity.js';
 
 export const RENDER_LAYERS = {
     background: 0,
@@ -43,7 +43,7 @@ export class EntityManager {
     }
 
     /**
-     * @param {number} dt 
+     * @param {number} dt
      */
     update(dt) {
         for (let i = 0; i < this.entities.length; i++) {

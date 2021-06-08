@@ -1,6 +1,6 @@
-import { EntitySprite } from "../entity.js";
-import { RENDER_LAYERS } from "../managers/entity_manager.js";
-import { GameManager } from "../managers/game_manager.js";
+import { EntitySprite } from '../entity.js';
+import { RENDER_LAYERS } from '../managers/entity_manager.js';
+import { GameManager } from '../managers/game_manager.js';
 
 /**************************************************
  * Klasse: Rock
@@ -24,7 +24,7 @@ export class Rock extends EntitySprite {
             y,
             25 * 2,
             25 * 1,
-            "./images/rock.png",
+            './images/rock.png',
             RENDER_LAYERS.wall,
             false
         );

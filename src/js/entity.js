@@ -1,4 +1,4 @@
-import { RENDER_LAYERS } from "./managers/entity_manager.js";
+import { RENDER_LAYERS } from './managers/entity_manager.js';
 
 /**************************************************
  * Klasse: Entity
@@ -107,7 +107,7 @@ export class Entity {
 
     /**
      * Verplaats de entity met dx,dy
-     * @param {number} dt 
+     * @param {number} dt
      */
     update(dt) {
         this.x += this.dx * dt;
@@ -153,10 +153,10 @@ export class EntitySprite extends Entity {
         // Laad image en als hij geladen is maak een pattern
         const img = new Image();
         img.src = image;
-        img.addEventListener("load", () => {
-            const patternCanvas = document.createElement("canvas");
-            const patternContext = patternCanvas.getContext("2d");
-            this.pattern = patternContext.createPattern(img, "repeat");
+        img.addEventListener('load', () => {
+            const patternCanvas = document.createElement('canvas');
+            const patternContext = patternCanvas.getContext('2d');
+            this.pattern = patternContext.createPattern(img, 'repeat');
         });
     }
 

@@ -1,5 +1,5 @@
-import { Hud } from "../hud.js";
-import { GameManager } from "../managers/game_manager.js";
+import { Hud } from '../hud.js';
+import { GameManager } from '../managers/game_manager.js';
 
 /**************************************************
  * Klasse: Lifes
@@ -13,7 +13,7 @@ export class Lifes extends Hud {
     constructor(gameManager) {
         super(gameManager);
         this.hart = new Image();
-        this.hart.src = "./images/hart.png";
+        this.hart.src = './images/hart.png';
 
         // Zo dat het niet elke keer opnieuw wordt berekend
         this.x = 1025 / 2 - 34 * 1.5;
@@ -26,7 +26,7 @@ export class Lifes extends Hud {
      * @param {CanvasRenderingContext2D} ctx
      */
     render(ctx) {
-        ctx.fillStyle = "#00bfff";
+        ctx.fillStyle = '#00bfff';
         for (let i = 0; i < this.gameManager.lifes; i++) {
             ctx.drawImage(this.hart, this.x + 35 * i, 60, 30, 30);
         }
