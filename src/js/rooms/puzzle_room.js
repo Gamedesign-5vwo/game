@@ -86,8 +86,8 @@ export class PuzzleRoom extends Room {
         // Decorations
         this.entities.push(
             new EntitySprite(
-                25 * 2,
-                25 * 2,
+                25 * 15,
+                25 * 15,
                 100,
                 75,
                 "./images/rug/rug.png",
@@ -98,8 +98,8 @@ export class PuzzleRoom extends Room {
 
         this.entities.push(
             new EntitySprite(
-                25 * 15,
-                25 * 15,
+                25 * 30,
+                25 * 1,
                 75,
                 75,
                 "./images/desk/apple_with_chair.png",
@@ -109,8 +109,8 @@ export class PuzzleRoom extends Room {
 
         this.entities.push(
             new EntitySprite(
-                25 * 17,
-                25 * 17,
+                25 * 35,
+                25 * 1,
                 50,
                 75,
                 "./images/bed/front.png",
@@ -120,8 +120,8 @@ export class PuzzleRoom extends Room {
 
         this.entities.push(
             new EntitySprite(
-                25 * 18,
-                25 * 18,
+                25 * 30,
+                25 * 22,
                 75,
                 50,
                 "./images/table/long.png",
@@ -132,7 +132,30 @@ export class PuzzleRoom extends Room {
         this.entities.push(
             new EntitySprite(
                 25 * 10,
-                25 * 10,
+                25 * 1,
+                50,
+                75,
+                "./images/closet/front.png",
+                RENDER_LAYERS.floor_decoration
+            )
+        );
+
+
+        this.entities.push(
+            new EntitySprite(
+                25 * 1,
+                25 * 15,
+                25,
+                75,
+                "./images/bookcase/left.png",
+                RENDER_LAYERS.floor_decoration
+            )
+        );
+
+        this.entities.push(
+            new EntitySprite(
+                25 * 1,
+                25 * 25,
                 100,
                 75,
                 "./images/rug/rug.png",
@@ -143,11 +166,55 @@ export class PuzzleRoom extends Room {
 
         this.entities.push(
             new EntitySprite(
-                25 * 10,
-                25 * 1,
+                25 * 33,
+                25 * 22,
+                25,
                 50,
-                75,
-                "./images/closet/front.png",
+                "./images/chair/left.png",
+                RENDER_LAYERS.floor_decoration
+            )
+        );
+
+        this.entities.push(
+            new EntitySprite(
+                25 * 29,
+                25 * 22,
+                25,
+                50,
+                "./images/chair/right.png",
+                RENDER_LAYERS.floor_decoration
+            )
+        );
+
+        this.entities.push(
+            new EntitySprite(
+                25 * 31,
+                25 * 20,
+                25,
+                50,
+                "./images/chair/front.png",
+                RENDER_LAYERS.floor_decoration
+            )
+        );
+
+        this.entities.push(
+            new EntitySprite(
+                25 * 31,
+                25 * 23,
+                25,
+                50,
+                "./images/chair/rear.png",
+                RENDER_LAYERS.floor_decoration
+            )
+        );
+
+        this.entities.push(
+            new EntitySprite(
+                25 * 5,
+                25 * 24,
+                50,
+                100,
+                "./images/bed.png",
                 RENDER_LAYERS.floor_decoration
             )
         );
