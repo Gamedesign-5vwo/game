@@ -1,6 +1,8 @@
 import { Background } from "../entities/background.js";
 import { Wall } from "../entities/wall.js";
 import { Room } from "../room.js";
+import { EntitySprite } from "../entity.js";
+import { RENDER_LAYERS } from "../managers/entity_manager.js";
 
 /**************************************************
  * Klasse: MazeRoomFour
@@ -25,6 +27,39 @@ export class MazeRoomFour extends Room {
 
         //vloer
         this.entities.push(new Background(0, 0, 25 * 17, 25 * 17));
+
+        this.entities.push(
+            new EntitySprite(
+                25 * 14,
+                25 * 1,
+                50,
+                75,
+                "./images/bookcase/front.png",
+                RENDER_LAYERS.floor_decoration
+            )
+        );
+
+        this.entities.push(
+            new EntitySprite(
+                25 * 2,
+                25 * 2,
+                50,
+                75,
+                "./images/bed/front.png",
+                RENDER_LAYERS.floor_decoration
+            )
+        );
+
+        this.entities.push(
+            new EntitySprite(
+                25 * 12,
+                25 * 12,
+                50,
+                100,
+                "./images/bed.png",
+                RENDER_LAYERS.floor_decoration
+            )
+        );
 
         super.init();
     }
