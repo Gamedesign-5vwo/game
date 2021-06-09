@@ -37,6 +37,8 @@ Thomas, 28-5-2021, 1 uur, Speler niet afhankelijk van snelheid pc
 Mick, 28-5-2021, 4 uur, Speler niet afhankelijk van snelheid pc + teksten schrijven + achtergrondmuziekje zoeken
 Daan, 28-5-2021, 4 uur, Speler niet afhankelijk van snelheid pc + teksten schrijven + achtergrondmuziekje zoeken
 
+Mick, 29-5-2021, 4 uur verhaal schrijven en achtergrond geluid uitzoeken
+Daan, 29-5-2021, 4 uur verhaal schrijven en achtergrond geluid uitzoeken
 Thomas, 29-5-2021, 3 uur, Splashscreen + music
 Thomas, 29-5-2021, 1 uur + 30 minuten, Functionaliteit rock
 Thomas, 29-5-2021, 3 uur + 30 minuten, Start, gameover, gewonnen schermen
@@ -58,5 +60,15 @@ Daan, 2-6-2021, 5 uur, doolhof + decoraties
 Rick, 5-6-2021, 3 uur, testen in het doolhof
 Rick, 6-6-2021, 3 uur, hele spel achter elkaar getest
 
-Daan, 8-6-2021, ??????, Daan decoratie doolhof
+Daan, 8-6-2021, 6 uur, Daan decoratie doolhof
 Thomas, 8-6-2021, 5 uur, daan's decoratie checken en prettier + puzzle stukjes verstoppen
+
+Daan, 9-6-2021, 50 minuten logboek afronden en game testen
+Daan, 9-6-2021, 2 uur laatste punten nagekeken en gecommuniceerd met de groep
+
+Totale tijd:
+Thomas: 56,17 uur
+Luuk: 32 uur
+Mick: 31 uur
+Daan: 25,58 uur
+Rick: 15,75 uur
