@@ -24,19 +24,22 @@ export class MazeRoomFive extends Room {
         this.entities.push(new Wall(0, 25 * 16, 17, 1));
         //links
         this.entities.push(new Wall(0, 0, 1, 8));
-        this.entities.push(
-            new Door(
-                25 * 0,
-                25 * 8,
-                1,
-                3,
-                'level_2',
-                () => {
-                    //Niks want pas bij de stenen gaat het level in
-                },
-                this.gameManager
-            )
-        );
+        if(!this.gameManager.finishedMaze){
+            this.entities.push(
+                new Door(
+                    25 * 0,
+                    25 * 8,
+                    1,
+                    3,
+                    'level_2',
+                    () => {
+                        this.gameManager.finishedMaze = true;
+                    },
+                    this.gameManager
+                )
+            );
+        }
+        
         this.entities.push(new Wall(0, 11 * 25, 1, 6));
 
         //rechts
@@ -51,14 +54,14 @@ export class MazeRoomFive extends Room {
                 25 * 2,
                 25 * 8,
                 this.gameManager.player,
-                new Key(25 * 3, 25 * 3, 'level_2'),
+                new Key(25 * 2, 25 * -21, 'level_2'),
                 this.gameManager.entityManager,
                 './images/puzzles/sandcastle.png',
                 {
                     x: this.x,
                     y: this.y,
                 },
-                [2, 7]
+                [ 2, 7]
             )
         );
 
