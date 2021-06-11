@@ -40,7 +40,8 @@ export class Strandbal extends Entity {
         for (let i = 0; i < entities.length; i++) {
             const entity = entities[i];
             if (this.collides(entity)) {
-                if (entity instanceof Player) this.gameManager.setGameOver();
+                if (entity instanceof Player && !this.gameManager.gameOver)
+                    this.gameManager.setGameOver();
 
                 this.gameManager.entityManager.remove(this);
                 break;
