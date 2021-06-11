@@ -77,6 +77,7 @@ export class PuzzleRoom extends Room {
                     3,
                     'level_1',
                     () => {
+                        this.gameManager.finishedPuzzle = true;
                         this.gameManager.setState(1);
                     },
                     this.gameManager
