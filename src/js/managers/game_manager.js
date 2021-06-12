@@ -51,27 +51,27 @@ export class GameManager {
          */
         this.lifes = 3;
 
-        /** 
+        /**
          * @type {boolean}
          */
         this.finishedMaze = false;
 
-        /** 
+        /**
          * @type {boolean}
          */
-         this.finishedPuzzle = false;
+        this.finishedPuzzle = false;
 
-         // Maze
-         const maze = new URL(window.location.href).searchParams.get('maze');
-         if(maze) {
-             this.finishedMaze = true;
-         }
- 
-         // Puzzle
-         const puzzle = new URL(window.location.href).searchParams.get('puzzle');
-         if(puzzle) {
-             this.finishedPuzzle = true;
-         }
+        // Maze
+        const maze = new URL(window.location.href).searchParams.get('maze');
+        if (maze) {
+            this.finishedMaze = true;
+        }
+
+        // Puzzle
+        const puzzle = new URL(window.location.href).searchParams.get('puzzle');
+        if (puzzle) {
+            this.finishedPuzzle = true;
+        }
 
         /**
          * @type {number}
@@ -106,7 +106,11 @@ export class GameManager {
         /**
          * @type {Player}
          */
-        this.player = new Player(this.finishedMaze ? 25 * 2: 50, this.finishedMaze ?25 * -21.5 : 50, this);
+        this.player = new Player(
+            this.finishedMaze ? 25 * 2 : 50,
+            this.finishedMaze ? 25 * -21.5 : 50,
+            this
+        );
         this.entityManager.add(this.player);
 
         /**
@@ -148,7 +152,7 @@ export class GameManager {
             this.rooms[i].init();
         }
 
-        this.setState(1);
+        this.setState(0);
 
         // Levens updaten vanuit link
         const lifes = new URL(window.location.href).searchParams.get('lifes');
@@ -296,13 +300,13 @@ export class GameManager {
                     }
                     const url = new URL(window.location.href);
                     url.searchParams.set('lifes', (this.lifes - 1).toString());
-                   
-                    if(this.finishedMaze){
-                        url.searchParams.set("maze", "1");
+
+                    if (this.finishedMaze) {
+                        url.searchParams.set('maze', '1');
                     }
-                    
-                    if(this.finishedPuzzle){
-                        url.searchParams.set("puzzle", "1");
+
+                    if (this.finishedPuzzle) {
+                        url.searchParams.set('puzzle', '1');
                     }
 
                     window.location.href = url.href;
