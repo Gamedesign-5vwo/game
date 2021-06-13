@@ -306,6 +306,7 @@ export class GameManager {
                     }
 
                     if (this.finishedPuzzle) {
+                        this.setState(1);
                         url.searchParams.set('puzzle', '1');
                     }
 
