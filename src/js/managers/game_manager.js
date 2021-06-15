@@ -152,8 +152,11 @@ export class GameManager {
             this.rooms[i].init();
         }
 
-        this.setState(0);
-
+        if(this.finishedPuzzle) {
+            this.setState(1)
+        } else {
+            this.setState(0);
+        }
         // Levens updaten vanuit link
         const lifes = new URL(window.location.href).searchParams.get('lifes');
         if (lifes) {
@@ -306,7 +309,6 @@ export class GameManager {
                     }
 
                     if (this.finishedPuzzle) {
-                        this.setState(1);
                         url.searchParams.set('puzzle', '1');
                     }
 
